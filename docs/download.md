@@ -1,8 +1,11 @@
 # ダウンロード
 
 > [!WARNING]
+> 
 > これらのパッケージは最新ではない可能性がある。必ずアップローダを確認すること。
+> 
 > 利用による損害等の補償はしない。
+> 
 > 最新情報は [NicoCache 本スレ](https://ff2ch.syoboi.jp/?q=NicoCache) を参照。
 
 ## Eclipse Temurin OpenJDK

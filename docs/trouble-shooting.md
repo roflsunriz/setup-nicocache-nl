@@ -252,12 +252,9 @@ java -Ddareka.debug=true -Ddareka.logfile=debug.log -ea -jar NicoCache_nl.jar
 ```
 
 【extension】【nlFilters】はすべて使用している拡張機能・nlFilterを全て列挙する。
+
 【プロキシ】はデフォルトのproxy.pacファイルを使用している場合はその旨を記述する。変更している場合はその旨を記述し、変更点も書く。
+
 【その他】はその他変更している設定があれば記述する。
+
 【事象・質問内容】はできるだけ詳しく起きている事象について記述する。
-
-
-
-
-
-

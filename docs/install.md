@@ -9,11 +9,11 @@ winget install Microsoft.Powershell
 4. ターミナルを閉じる
 5. 「Windowsキー + Rキー」を同時押しする
 6. 出てきたウィンドウに「pwsh」と打つ
-7. Cドライブ直下にNicoCache_nlディレクトリを作成する
+7. Cドライブ直下に`NicoCache_nl`ディレクトリを作成する
 ```powershell
 New-Item -ItemType Directory -Path "C:\NicoCache_nl"
 ```
-8. その中にWorkingDirectoryディレクトリを作成する
+8. その中に`WorkingDirectory`ディレクトリを作成する
 ```powershell
 New-Item -ItemType Directory -Path "C:\NicoCache_nl\WorkingDirectory"
 ```
@@ -27,7 +27,7 @@ winget install Gyan.FFmpeg
 ```powershell
 winget install 7zip.7zip
 ```
-12. Apache Antをダウンロードし、展開し、Cドライブ直下にantディレクトリを移動
+12. Apache Antをダウンロードし、展開し、Cドライブ直下に`ant`ディレクトリを移動
 ```powershell
 Set-Location "C:\NicoCache_nl\WorkingDirectory"
 Invoke-WebRequest -Uri "https://dlcdn.apache.org//ant/binaries/apache-ant-1.10.15-bin.zip" -OutFile "apache-ant-1.10.15-bin.zip"
@@ -40,7 +40,7 @@ Move-Item -Path "C:\NicoCache_nl\WorkingDirectory\apache-ant-1.10.15" -Destinati
 [Environment]::SetEnvironmentVariable("Path", "C:\ant\bin;$env:Path", "User")
 ```
 14. 上記手順5・6を繰り返してターミナルを再起動。環境変数が適用される。
-15. NicoCache_nl 2026-01-15を避難所アップローダからダウンロードして展開
+15. `NicoCache_nl-2026-01-15.7z`を避難所アップローダからダウンロードして展開
 ```powershell
 Set-Location "C:\NicoCache_nl"
 Invoke-WebRequest -Uri "https://nicocache.jpn.org/download.php?id=19&key=514e8a406c60c969adc4ff934d5e65427cdc09c74cab334e543f7c96f80b4d81" -OutFile "NicoCache_nl-2026-01-15.7z"
@@ -63,12 +63,12 @@ Import-Certificate -FilePath "certs/ca.cer" -CertStoreLocation "Cert:\CurrentUse
 19. certs/ca.cerを選択
 20. 「この認証局によるウェブサイトの識別を信頼する」にチェックを入れる
 21. Firefoxを再起動する
-22. proxy_sample.pacからproxy.pacを作成
+22. `proxy_sample.pac`から`proxy.pac`を作成
 ```powershell
 Set-Location "C:\NicoCache_nl"
 Copy-Item -Path "C:\NicoCache_nl\proxy_sample.pac" -Destination "C:\NicoCache_nl\proxy.pac"
 ```
-23. その他、config.propertiesに変更したい設定があれば編集する。デフォルト設定はdefaultsディレクトリに格納されている。
+23. その他、`config.properties`に変更したい設定があれば編集する。デフォルト設定は`defaults`ディレクトリに格納されている。
 24. ランチャースクリプトを作成
 ```powershell
 $script = @'
@@ -77,7 +77,7 @@ Start-Process -FilePath "javaw" -ArgumentList "-jar", "NicoCache_nl.jar"
 '@
 $script | Out-File -FilePath "RunNicoCache.ps1" -Encoding utf8
 ```
-25. NicoCacheGUI.propertyの設定を書き換える
+25. `NicoCacheGUI.property`の設定を書き換える
 ```powershell
 (Get-Content "NicoCacheGUI.property") -replace "^HideWindow=.*", "HideWindow=true" -replace "^LogWindowAlwaysOnTop=.*", "LogWindowAlwaysOnTop=false" | Set-Content "NicoCacheGUI.property"
 ```
@@ -98,4 +98,4 @@ Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -De
 Set-Location "C:\NicoCache_nl"
 .\RunNicoCache.ps1
 ```
-29. インストール完了。なお、アンイストール時はCドライブ直下の"NicoCache_nl"ディレクトリを削除し、タスクスケジューラーから"NicoCacheAutoStart"を削除すればOK
+29. インストール完了。なお、アンイストール時はCドライブ直下の`NicoCache_nl`ディレクトリを削除し、タスクスケジューラーから`NicoCacheAutoStart`を削除すればOK
