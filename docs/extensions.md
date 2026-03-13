@@ -7,7 +7,7 @@ extensionsはNicoCacheの拡張機能である。Javaファイルとして作り
 1. extensionsフォルダに移動してNicoCacheを再起動する
 
 ## .classファイルが同梱されていない場合
-1. extensions\build.cmdにドラッグ・アンド・ドロップする
+1. extensions\build.cmdに.javaファイルをドラッグ・アンド・ドロップする
 2. エラーが無ければ.classファイルが生成される
 3. .classファイルが生成されない場合は作者に修正を依頼する
 
@@ -17,6 +17,6 @@ extensionsはNicoCacheの拡張機能である。Javaファイルとして作り
 1. .classファイルを上書き更新してNicoCacheを再起動する
 
 ## .classファイルが同梱されていない場合
-1. extensions\build.cmdにドラッグ・アンド・ドロップする
+1. extensions\build.cmdに.javaファイルをドラッグ・アンド・ドロップする
 2. エラーが無ければ.classファイルが上書き更新される。更新日時が新しくなる。
 3. .classファイルが上書き更新されない場合は作者に修正を依頼する
