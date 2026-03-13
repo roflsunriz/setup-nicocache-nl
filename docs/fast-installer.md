@@ -16,12 +16,15 @@ Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/phqqtgfzb3yxsgzml54i2/Nic
 .\NicoCache_nl-Setup-2025-04-03.exe
 ```
 5. インストールの終わりにスクリプトが自動実行されて以下の作業が行われる
-- ANT_HOMEとPATHの自動設定
-- 証明書の作成とWindows証明書ストアへの自動インストール
-- プロキシサーバーの自動設定
-- タスクスケジューラへの自動設定
-- Firefoxの証明書の設定
-- NicoCache_nl本体の自動更新
+
+    | 自動実行される作業 |
+    |---|
+    | ANT_HOMEとPATHの自動設定 |
+    | 証明書の作成とWindows証明書ストアへの自動インストール |
+    | プロキシサーバーの自動設定 |
+    | タスクスケジューラへの自動設定 |
+    | Firefoxの証明書の設定 |
+    | NicoCache_nl本体の自動更新 |
 
 6. 大抵の場合、高速インストーラより最新の差分があるので[避難所](https://nicocache.jpn.org/)から本体をダウンロードして上書き更新する
 7. 必要に応じて拡張機能をインストールしたり、nlFiltersを導入したり、config.propertiesやNicoCacacheGUI.propertyやproxy.pacの設定を調整する

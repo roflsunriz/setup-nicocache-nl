@@ -50,6 +50,11 @@ Move-Item -Path "C:\NicoCache_nl\WorkingDirectory\apache-ant-1.10.15" -Destinati
 
 [NicoCache_nl-Setup.exe (2025/06/23 版)](https://www.dropbox.com/scl/fi/phqqtgfzb3yxsgzml54i2/NicoCache_nl-Setup.exe?rlkey=07d3x698ul6nnxsp7jzl042rz&st=nslk4ige&dl=1)
 
+```powershell
+Set-Location $env:USERPROFILE\Downloads
+Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/phqqtgfzb3yxsgzml54i2/NicoCache_nl-Setup.exe?rlkey=07d3x698ul6nnxsp7jzl042rz&st=nslk4ige&dl=1" -OutFile "NicoCache_nl-Setup.exe"
+```
+
 使い方は[高速インストーラ](fast-installer.md)を参照。
 
 ## 7-zip
