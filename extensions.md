@@ -1,0 +1,19 @@
+# extensionsのインストール方法
+
+## .classファイルが同梱されている場合
+1. extensionsフォルダに移動してNicoCacheを再起動する
+
+## .classファイルが同梱されていない場合
+1. extensions\build.cmdにドラッグ・アンド・ドロップする
+2. エラーが無ければ.classファイルが生成される
+3. .classファイルが生成されない場合は作者に修正を依頼する
+
+# extensionsの更新方法
+
+## .classファイルが同梱されている場合
+1. .classファイルを上書き更新してNicoCacheを再起動する
+
+## .classファイルが同梱されていない場合
+1. extensions\build.cmdにドラッグ・アンド・ドロップする
+2. エラーが無ければ.classファイルが生成される
+3. .classファイルが生成されない場合は作者に修正を依頼する
