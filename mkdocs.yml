@@ -1,0 +1,65 @@
+site_name: NicoCache_nl Wiki
+site_description: NicoCache_nl のインストール・設定・使い方ガイド
+site_author: roflsunriz
+site_url: https://roflsunriz.github.io/setup-nicocache-nl/
+
+repo_url: https://github.com/roflsunriz/setup-nicocache-nl
+repo_name: roflsunriz/setup-nicocache-nl
+
+theme:
+  name: material
+  language: ja
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードに切り替え
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: ライトモードに切り替え
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.instant
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+
+nav:
+  - ホーム: index.md
+  - ダウンロード: download.md
+  - インストール:
+    - 通常インストール: install.md
+    - 簡単インストーラー: fast-installer.md
+  - アップデート: update.md
+  - nlFilters:
+    - 概要: nl-filters.md
+    - 構文リファレンス: nl-filters-syntax.md
+    - 正規表現: regex.md
+  - 拡張機能: extensions.md
+  - トラブルシューティング: trouble-shooting.md
+  - サポートサイト: support-site.md
