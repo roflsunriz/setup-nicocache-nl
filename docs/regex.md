@@ -1,7 +1,10 @@
 # 正規表現 (Regular Expressions)
 
 正規表現とは、通常の検索より複雑な条件でテキストを検索・置換するための記法である。
+
 たとえば `nicocache_nl` という文字列は、`\w+_\w+` や `[a-z]+_[a-z]+` など複数の表現でマッチできる。
+
+特に、NicoCacheのnlFiltersでは正規表現を使用することが多い。
 
 - [MDN 正規表現チートシート](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet)
 - [Rubular — 正規表現テスター](https://www.rubular.com/)

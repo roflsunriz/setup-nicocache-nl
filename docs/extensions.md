@@ -1,5 +1,8 @@
 # extensionsのインストール方法
 
+## extensionsとは？
+extensionsはNicoCacheの拡張機能である。Javaファイルとして作り、コンパイルすることで独自の機能を付加することが可能である。
+
 ## .classファイルが同梱されている場合
 1. extensionsフォルダに移動してNicoCacheを再起動する
 

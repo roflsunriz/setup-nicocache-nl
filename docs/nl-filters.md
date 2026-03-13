@@ -1,3 +1,6 @@
+# nlFiltersとは？
+nlFiltersはNicoCacheのページ書き換え機能である。ニコニコ動画の好きなページに任意のスタイルやスクリプトやHTMLスニペットを埋め込むことが可能である。
+
 # nlFiltersのインストール方法
 
 1. nlFiltersフォルダにテキストファイルを配置する
