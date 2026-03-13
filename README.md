@@ -1,6 +1,6 @@
-# NicoCache_nl Wiki
+# NicoCache_nl セットアップガイド
 
-NicoCache_nl の非公式セットアップガイド・使い方 Wiki です。
+NicoCache_nl の公式セットアップガイドです。
 
 **公開 URL:** https://roflsunriz.github.io/setup-nicocache-nl/
 
@@ -8,7 +8,7 @@ NicoCache_nl の非公式セットアップガイド・使い方 Wiki です。
 
 ## 概要
 
-[NicoCache_nl](https://nicocache.jpn.org/) はニコニコ動画の動画・サムネイルをローカルにキャッシュするプロキシサーバーソフトウェアです。このリポジトリは NicoCache_nl のインストール・設定・トラブルシューティングを日本語でまとめた Wiki です。
+[NicoCache_nl](https://nicocache.jpn.org/) はニコニコ動画の動画・サムネイルをローカルにキャッシュするプロキシサーバーソフトウェアです。このリポジトリは NicoCache_nl のインストール・設定・トラブルシューティングを日本語でまとめたドキュメントです。
 
 ## ドキュメント構成
 
@@ -43,4 +43,4 @@ mkdocs serve
 
 ## ライセンス
 
-このリポジトリのドキュメントは [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja) に基づき公開しています。
+このリポジトリは [MIT License](LICENSE) に基づき公開しています。
