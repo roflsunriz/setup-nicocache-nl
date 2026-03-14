@@ -1,4 +1,4 @@
-﻿# ステップ 3: Apache Ant のインストール
+# ステップ 3: Apache Ant のインストール
 # ダウンロード・展開・C:\ant への移動・環境変数（ANT_HOME / PATH）の設定
 
 function Invoke-Step03 {
@@ -9,7 +9,7 @@ function Invoke-Step03 {
     $antVersion = '1.10.15'
     $antZip     = "apache-ant-$antVersion-bin.zip"
     $antUrl     = "https://dlcdn.apache.org//ant/binaries/$antZip"
-    $workDir    = 'C:\NicoCache_nl\WorkingDirectory'
+    $workDir    = $env:TEMP
     $antDest    = 'C:\ant'
 
     Write-StepHeader "ステップ 3: $stepName"

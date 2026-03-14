@@ -13,40 +13,36 @@ winget install Microsoft.PowerShell --source winget
 ```powershell
 New-Item -ItemType Directory -Path "C:\NicoCache_nl"
 ```
-8. その中に`WorkingDirectory`ディレクトリを作成する
-```powershell
-New-Item -ItemType Directory -Path "C:\NicoCache_nl\WorkingDirectory"
-```
-9. ターミナルでEclipse Temurin OpenJDK 17 と FFmpegをインストールする
+8. ターミナルでEclipse Temurin OpenJDK 17 と FFmpegをインストールする
 ```powershell
 winget install EclipseAdoptium.Temurin.17.JDK --source winget
 winget install Gyan.FFmpeg --source winget
 ```
-10. 条項に同意してインストール[Y]し、UACが立ち上がるので許可して、インストールウィザードに従ってインストールする。（基本的に何も変更せずにインストールでOK）
-11. 7-zipをインストールする
+9. 条項に同意してインストール[Y]し、UACが立ち上がるので許可して、インストールウィザードに従ってインストールする。（基本的に何も変更せずにインストールでOK）
+10. 7-zipをインストールする
 ```powershell
 winget install 7zip.7zip --source winget
 ```
-12. Apache Antをダウンロードし、展開し、Cドライブ直下に`ant`ディレクトリを移動
+11. Apache Antをダウンロードし、展開し、Cドライブ直下に`ant`ディレクトリを移動
 ```powershell
-Set-Location "C:\NicoCache_nl\WorkingDirectory"
+Set-Location $env:TEMP
 Invoke-WebRequest -Uri "https://dlcdn.apache.org//ant/binaries/apache-ant-1.10.15-bin.zip" -OutFile "apache-ant-1.10.15-bin.zip"
 7z x "apache-ant-1.10.15-bin.zip"
-Move-Item -Path "C:\NicoCache_nl\WorkingDirectory\apache-ant-1.10.15" -Destination "C:\ant"
+Move-Item -Path "$env:TEMP\apache-ant-1.10.15" -Destination "C:\ant"
 ```
-13. ユーザー環境変数のPathにantを登録。ANT_HOMEも登録
+12. ユーザー環境変数のPathにantを登録。ANT_HOMEも登録
 ```powershell
 [Environment]::SetEnvironmentVariable("ANT_HOME", "C:\ant", "User")
 [Environment]::SetEnvironmentVariable("Path", "C:\ant\bin;$env:Path", "User")
 ```
-14. 上記手順5・6を繰り返してターミナルを再起動。環境変数が適用される。
-15. `NicoCache_nl-2026-01-15.7z`を避難所アップローダからダウンロードして展開
+13. 上記手順5・6を繰り返してターミナルを再起動。環境変数が適用される。
+14. `NicoCache_nl-2026-01-15.7z`を避難所アップローダからダウンロードして展開
 ```powershell
 Set-Location "C:\NicoCache_nl"
 Invoke-WebRequest -Uri "https://nicocache.jpn.org/download.php?id=19&key=514e8a406c60c969adc4ff934d5e65427cdc09c74cab334e543f7c96f80b4d81" -OutFile "NicoCache_nl-2026-01-15.7z"
 7z x "NicoCache_nl-2026-01-15.7z"
 ```
-16. BouncyCastleから依存ライブラリをダウンロードし、証明書を生成、ユーザー証明書に証明書を追加 (Chromeは自動的にWindowsの証明書を参照する)
+15. BouncyCastleから依存ライブラリをダウンロードし、証明書を生成、ユーザー証明書に証明書を追加 (Chromeは自動的にWindowsの証明書を参照する)
 ```powershell
 Set-Location "C:\NicoCache_nl\lib"
 Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk18on/1.83/bcprov-jdk18on-1.83.jar" -OutFile "bcprov.jar"
@@ -58,18 +54,18 @@ Copy-Item -Path "C:\NicoCache_nl\config.properties.default" -Destination "C:\Nic
 Add-Content -Path "config.properties" -Value "enableMitM=true"
 Import-Certificate -FilePath "certs/ca.cer" -CertStoreLocation "Cert:\CurrentUser\Root"
 ```
-17. Firefoxを開く
-18. 設定 > プライバシーとセキュリティ > 証明書 > 証明書を表示 > 認証局証明書 > インポート 
-19. certs/ca.cerを選択
-20. 「この認証局によるウェブサイトの識別を信頼する」にチェックを入れる
-21. Firefoxを再起動する
-22. `proxy_sample.pac`から`proxy.pac`を作成
+16. Firefoxを開く
+17. 設定 > プライバシーとセキュリティ > 証明書 > 証明書を表示 > 認証局証明書 > インポート 
+18. certs/ca.cerを選択
+19. 「この認証局によるウェブサイトの識別を信頼する」にチェックを入れる
+20. Firefoxを再起動する
+21. `proxy_sample.pac`から`proxy.pac`を作成
 ```powershell
 Set-Location "C:\NicoCache_nl"
 Copy-Item -Path "C:\NicoCache_nl\proxy_sample.pac" -Destination "C:\NicoCache_nl\proxy.pac"
 ```
-23. その他、`config.properties`に変更したい設定があれば編集する。デフォルト設定は`defaults`ディレクトリに格納されている。
-24. ランチャースクリプトを作成
+22. その他、`config.properties`に変更したい設定があれば編集する。デフォルト設定は`defaults`ディレクトリに格納されている。
+23. ランチャースクリプトを作成
 ```powershell
 $script = @'
 Set-Location -Path $PSScriptRoot
@@ -77,15 +73,15 @@ Start-Process -FilePath "javaw" -ArgumentList "-jar", "NicoCache_nl.jar"
 '@
 $script | Out-File -FilePath "RunNicoCache.ps1" -Encoding utf8
 ```
-25. `NicoCacheGUI.property`の設定を書き換える
+24. `NicoCacheGUI.property`の設定を書き換える
 ```powershell
 (Get-Content "NicoCacheGUI.property") -replace "^HideWindow=.*", "HideWindow=true" -replace "^LogWindowAlwaysOnTop=.*", "LogWindowAlwaysOnTop=false" | Set-Content "NicoCacheGUI.property"
 ```
-26. ターミナルを管理者権限で起動し、以下を実行してスクリプトの実行を許可
+25. ターミナルを管理者権限で起動し、以下を実行してスクリプトの実行を許可
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Force
 ```
-27. 管理者権限で起動したターミナルでタスクスケジューラーにランチャースクリプトを登録
+26. 管理者権限で起動したターミナルでタスクスケジューラーにランチャースクリプトを登録
 ```powershell
 $taskName = "NicoCacheAutoStart"
 $ps1Path = "C:\NicoCache_nl\RunNicoCache.ps1"
@@ -93,9 +89,9 @@ $action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument "-WindowStyle Hi
 $trigger = New-ScheduledTaskTrigger -AtLogOn
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Description "NicoCacheをログオン時に起動するタスク" -Force
 ```
-28. NicoCache_nlを起動
+27. NicoCache_nlを起動
 ```powershell
 Set-Location "C:\NicoCache_nl"
 .\RunNicoCache.ps1
 ```
-29. インストール完了。なお、アンイストール時はCドライブ直下の`NicoCache_nl`ディレクトリを削除し、タスクスケジューラーから`NicoCacheAutoStart`を削除すればOK
+28. インストール完了。なお、アンイストール時はCドライブ直下の`NicoCache_nl`ディレクトリを削除し、タスクスケジューラーから`NicoCacheAutoStart`を削除すればOK
