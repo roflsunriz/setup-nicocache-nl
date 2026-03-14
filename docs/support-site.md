@@ -1,8 +1,9 @@
 # サポートサイト
-<div style="text-align: right;">最終更新日：2026/03/14</div>
+<div style="text-align: right;">最終更新日：2026/03/15</div>
 ---
 
 分からないときはスレッドで質問する。
+トラブルに遭遇しているときは、[トラブルシューティング](./trouble-shooting.md)で原因の切り分けを実行し、質問テンプレートをきっちり埋めて投稿する。
 
 - [5ch (NicoCacheスレッド)](https://ff5ch.syoboi.jp/?q=NicoCache)
 - [Open2ch (NicoCacheスレッド)](https://find.open2ch.net/?bbs=&t=f&q=NicoCache&wh=&kako=checked&d=)

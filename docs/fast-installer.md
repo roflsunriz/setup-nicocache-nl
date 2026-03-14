@@ -18,14 +18,14 @@
 | NicoCacheGUI.property の設定 |
 | RunNicoCache.ps1 ランチャー生成・スクリプト実行ポリシー設定・タスクスケジューラー登録 |
 
-> [!NOTE]
-> 
-> Firefox への CA 証明書インポートは GUI 操作が必要なため自動化されていない。スクリプト実行後に手動でインポートするべきであり、スクリプトが手順を案内する。
+!!! note "Firefoxへの証明書インポートは手動での作業が必要"
+
+    Firefox への CA 証明書インポートは 手動でのインポート作業が必要
 
 ## 事前準備: PowerShell 7 のインストールと実行ポリシーの変更 { #事前準備-powershell-7-のインストールと実行ポリシーの変更 }
 
-初回のみ必要である。PowerShell 7 のインストールとスクリプト実行ポリシーの変更をまとめて行う。  
-**Windows PowerShell（powershell.exe）から実行できる。このスクリプトだけはPowerShell 7 が必要ではない。**
+最初のみこの作業が必要である。PowerShell 7 のインストールとスクリプト実行ポリシーの変更をまとめて行う。  
+**Windows PowerShell　6.2（powershell.exe）から実行可能。**
 
 1. 「Windowsキー + R」を押して「ファイル名を指定して実行」を開く
 2. `powershell` と入力して Enter
@@ -36,10 +36,10 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicoc
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
 ```
 
-UAC プロンプトが表示されたら「はい」を選択する。完了後に案内される通り、ターミナルを閉じて `pwsh` で再起動する。
+UAC プロンプトが表示されたら「はい」を選択する。完了後に案内される通り、ターミナルを閉じて Powershell 7 で再起動する。
 
 4. ターミナルのデフォルトプロファイルをPowerShell 7に変更する。
-5. 「+」 -> 「設定」 -> 「スタートアップ」 -> 「デフォルトのプロファイル」を「Powershell」（Windows PowerShellではない）に変更する
+5. 「∨」 -> 「設定」 -> 「スタートアップ」 -> 「デフォルトのプロファイル」を「Powershell」（Windows PowerShellではない）に変更する
 ![ターミナルの設定](./images/terminal-settings.png)
 6. ターミナルを再起動する（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
 

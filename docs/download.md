@@ -1,14 +1,12 @@
 # ダウンロード
-<div style="text-align: right;">最終更新日：2026/03/14</div>
+<div style="text-align: right;">最終更新日：2026/03/15</div>
 ---
 
-> [!WARNING]
-> 
-> これらのパッケージは最新ではない可能性がある。必ずアップローダを確認すること。
-> 
-> 利用による損害等の補償はしない。
-> 
-> 最新情報は [NicoCache 本スレ](https://ff2ch.syoboi.jp/?q=NicoCache) を参照。
+!!! warning "常に最新版を確認すること"
+
+    これらのパッケージは最新ではない可能性がある。 必ず[アップローダ](https://nicocache.jpn.org/)を確認すること。
+
+    利用による損害等の補償はしない。 最新情報は [NicoCache 本スレ](https://ff2ch.syoboi.jp/?q=NicoCache) を参照。
 
 ## PowerShell インストールスクリプト
 
