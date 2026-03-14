@@ -69,10 +69,10 @@ Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-j
 [Apache Ant](https://ant.apache.org/bindownload.cgi)
 
 ```powershell
-Set-Location "C:\NicoCache_nl\WorkingDirectory"
+Set-Location $env:TEMP
 Invoke-WebRequest -Uri "https://dlcdn.apache.org//ant/binaries/apache-ant-1.10.15-bin.zip" -OutFile "apache-ant-1.10.15-bin.zip"
 7z x "apache-ant-1.10.15-bin.zip"
-Move-Item -Path "C:\NicoCache_nl\WorkingDirectory\apache-ant-1.10.15" -Destination "C:\ant"
+Move-Item -Path "$env:TEMP\apache-ant-1.10.15" -Destination "C:\ant"
 ```
 
 ## 7-zip
