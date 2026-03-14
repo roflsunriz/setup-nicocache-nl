@@ -38,6 +38,11 @@ powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-Scri
 
 UAC プロンプトが表示されたら「はい」を選択してください。完了後に案内される通り、ターミナルを閉じて `pwsh` で再起動してください。
 
+4. ターミナルのデフォルトプロファイルをPowerShell 7に変更します。
+5. 「+」 -> 「設定」 -> 「スタートアップ」 -> 「デフォルトのプロファイル」を「Powershell」（Windows PowerShellではない）に変更する
+6. ターミナルを再起動する（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
+
+
 ---
 
 ## 方法 1: スクリプトをダウンロードして実行
