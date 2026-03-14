@@ -58,24 +58,12 @@ UAC プロンプトが表示されたら「はい」を選択してください�
 
 ダウンロード不要でワンライナーで実行できます。PowerShell 7 (`pwsh`) が必要です。
 
-PowerShell 7 未インストールの場合・実行ポリシーが未設定の場合は、先に以下を実施してください。  
-**Windows PowerShell（powershell.exe）から実行できます。PowerShell 7 は不要です。**
-
-1. 「Windowsキー + R」を押して「ファイル名を指定して実行」を開く
-2. `powershell` と入力して Enter
-3. 以下を実行する
-
-```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Enable-ScriptExecution.ps1" -OutFile "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
-powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
-```
-
-UAC プロンプトが表示されたら「はい」を選択してください。完了後はターミナルを閉じてください。
+PowerShell 7 未インストールの場合・実行ポリシーが未設定の場合は、先に[事前準備: PowerShell 7 のインストールと実行ポリシーの変更](#事前準備-powershell-7-のインストールと実行ポリシーの変更)を行ってください。
 
 ---
 
-4. 「Windowsキー + R」を押して `pwsh` と入力して Enter
-5. 以下を実行する
+1. 「Windowsキー + R」を押して `pwsh` と入力して Enter
+2. 以下を実行する
 
 ```powershell
 iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1') }"
