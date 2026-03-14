@@ -50,6 +50,14 @@ Move-Item -Path "C:\NicoCache_nl\NicoCache_nl\*" -Destination "C:\NicoCache_nl" 
 Remove-Item -Path "C:\NicoCache_nl\NicoCache_nl" -Recurse -Force
 ```
 16. BouncyCastleから依存ライブラリをダウンロードし、証明書を生成、ユーザー証明書に証明書を追加 (Chromeは自動的にWindowsの証明書を参照する)
+
+!!! warning
+    genCerts.batの実行フェーズでは`pause`が入るので`Enter`等のキーボード操作が必要。
+
+    誤ってターミナルを閉じないように注意！
+
+    `ImportCertificate`の実行フェーズでは確認画面が出るのでOKを押して承諾する。
+
 ```powershell
 Set-Location "C:\NicoCache_nl\lib"
 Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk18on/1.83/bcprov-jdk18on-1.83.jar" -OutFile "bcprov.jar"

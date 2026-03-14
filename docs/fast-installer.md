@@ -18,6 +18,14 @@
 | NicoCacheGUI.property の設定 |
 | RunNicoCache.ps1 ランチャー生成・スクリプト実行ポリシー設定・タスクスケジューラー登録 |
 
+!!! warning
+    genCerts.batの実行フェーズでは`pause`が入るので`Enter`等のキーボード操作が必要。
+
+    誤ってターミナルを閉じないように注意！
+
+    `ImportCertificate`の実行フェーズでは確認画面が出るのでOKを押して承諾する。
+
+
 !!! note "Firefoxへの証明書インポートは手動での作業が必要"
 
     Firefox への CA 証明書インポートは 手動でのインポート作業が必要
