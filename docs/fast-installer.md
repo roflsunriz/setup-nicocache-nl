@@ -66,7 +66,6 @@ PowerShell 7 未インストールの場合・実行ポリシーが未設定の�
 3. 以下を実行する
 
 ```powershell
-winget install Microsoft.PowerShell --source winget
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Enable-ScriptExecution.ps1" -OutFile "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
 ```
