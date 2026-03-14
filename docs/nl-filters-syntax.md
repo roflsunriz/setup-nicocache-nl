@@ -1,4 +1,6 @@
 # nlFiltersの文法
+<div style="text-align: right;">最終更新日：2026/03/14</div>
+---
 
 ## 定義行
 - UTF-8(BOMなし)で保存して行頭に以下の文字列を追加する

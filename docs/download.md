@@ -1,4 +1,6 @@
 # ダウンロード
+<div style="text-align: right;">最終更新日：2026/03/14</div>
+---
 
 > [!WARNING]
 > 

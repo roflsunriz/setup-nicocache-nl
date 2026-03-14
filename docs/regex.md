@@ -1,4 +1,6 @@
 # 正規表現 (Regular Expressions)
+<div style="text-align: right;">最終更新日：2026/03/14</div>
+---
 
 正規表現とは、通常の検索より複雑な条件でテキストを検索・置換するための記法である。
 

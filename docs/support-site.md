@@ -1,4 +1,7 @@
 # サポートサイト
+<div style="text-align: right;">最終更新日：2026/03/14</div>
+---
+
 分からないときはスレッドで質問する。
 
 - [5ch](https://ff5ch.syoboi.jp/?q=NicoCache)
