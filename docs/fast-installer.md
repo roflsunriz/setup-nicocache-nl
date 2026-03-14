@@ -79,7 +79,7 @@ UAC プロンプトが表示されたら「はい」を選択してください�
 5. 以下を実行する
 
 ```powershell
-& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1")))
+iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1') }"
 ```
 
 ---

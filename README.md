@@ -55,7 +55,7 @@ pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
 > PowerShell 7 未インストールの場合・実行ポリシーが未設定の場合は、先に[事前準備（初回のみ）](#事前準備初回のみ)を行ってください。
 
 ```powershell
-& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1")))
+iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1') }"
 ```
 
 ### DryRun で事前確認

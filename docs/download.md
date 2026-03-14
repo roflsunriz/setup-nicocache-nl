@@ -26,7 +26,7 @@ pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
 ダウンロード不要のワンライナー。PowerShell 7 (`pwsh`) が必要。
 
 ```powershell
-& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1")))
+iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1') }"
 ```
 
 ---
