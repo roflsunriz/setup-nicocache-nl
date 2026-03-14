@@ -26,6 +26,16 @@ function Invoke-Step02 {
         foreach ($tool in $tools) {
             $toolId   = $tool.Id
             $toolName = $tool.Name
+
+            # 冪等性チェック: winget list で既インストール済みならスキップ
+            if (-not $DryRun) {
+                $listOutput = winget list --id $toolId --exact --source winget 2>&1 | Out-String
+                if ($listOutput -match [regex]::Escape($toolId)) {
+                    Write-Host "  $toolName はインストール済みです。スキップします。" -ForegroundColor DarkGray
+                    continue
+                }
+            }
+
             Invoke-Action -Description "winget install $toolId ($toolName)" -DryRun:$DryRun -Action {
                 winget install $toolId `
                     --accept-source-agreements `
@@ -33,7 +43,6 @@ function Invoke-Step02 {
                     --silent `
                     --disable-interactivity `
                     --source winget
-                # 0 = 成功, -1978335189 (0x8A15002B) = 既インストール済み のどちらも正常
                 if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
                     throw "winget install $toolId が失敗しました (ExitCode: $LASTEXITCODE)"
                 }
