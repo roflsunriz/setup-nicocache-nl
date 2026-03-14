@@ -1,4 +1,4 @@
-﻿# NicoCache_nl インストーラ 共通ユーティリティ
+# NicoCache_nl インストーラ 共通ユーティリティ
 # このファイルはメインスクリプトから dot-source で読み込まれる
 
 function Invoke-Action {
@@ -14,7 +14,7 @@ function Invoke-Action {
         Write-Host "  [DRY-RUN] $Description" -ForegroundColor Cyan
     } else {
         Write-Host "  >> $Description" -ForegroundColor DarkGray
-        & $Action
+        & $Action | Out-Host
     }
 }
 
