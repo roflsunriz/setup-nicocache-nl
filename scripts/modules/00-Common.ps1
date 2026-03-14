@@ -1,4 +1,4 @@
-# NicoCache_nl インストーラ 共通ユーティリティ
+﻿# NicoCache_nl インストーラ 共通ユーティリティ
 # このファイルはメインスクリプトから dot-source で読み込まれる
 
 function Invoke-Action {

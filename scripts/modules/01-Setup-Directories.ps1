@@ -1,4 +1,4 @@
-# ステップ 1: ディレクトリ作成
+﻿# ステップ 1: ディレクトリ作成
 # C:\NicoCache_nl および WorkingDirectory を作成する
 
 function Invoke-Step01 {

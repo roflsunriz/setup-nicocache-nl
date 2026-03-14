@@ -1,4 +1,4 @@
-# ステップ 7: 設定ファイルの初期化
+﻿# ステップ 7: 設定ファイルの初期化
 # proxy.pac の作成・NicoCacheGUI.property の設定変更
 
 function Invoke-Step07 {

@@ -1,4 +1,4 @@
-# ステップ 3: Apache Ant のインストール
+﻿# ステップ 3: Apache Ant のインストール
 # ダウンロード・展開・C:\ant への移動・環境変数（ANT_HOME / PATH）の設定
 
 function Invoke-Step03 {

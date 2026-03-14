@@ -1,4 +1,4 @@
-# ステップ 2: 依存ツールのインストール
+﻿# ステップ 2: 依存ツールのインストール
 # winget を使って JDK17・FFmpeg・7-zip をインストールする
 
 function Invoke-Step02 {

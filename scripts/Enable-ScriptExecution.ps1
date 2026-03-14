@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     PowerShell 7 のインストールとスクリプト実行ポリシーを設定するスクリプト
 
@@ -72,7 +72,7 @@ Write-Host ''
 $pwshCmd = Get-Command pwsh -ErrorAction SilentlyContinue
 
 if ($pwshCmd) {
-    $pwshVersion = & pwsh -NoProfile -Command '$PSVersionTable.PSVersion.ToString()'
+    $pwshVersion = & pwsh -NoProfile -Command "& { `$PSVersionTable.PSVersion.ToString() }"
     Write-Host "  PowerShell 7 はすでにインストールされています (v$pwshVersion)。スキップします。" -ForegroundColor DarkGray
 } else {
     if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
@@ -148,4 +148,4 @@ Write-Host '     （PowerShell 7 のターミナルが開きます）' -Foregrou
 Write-Host '  3. Install-NicoCache.ps1 を実行する' -ForegroundColor White
 Write-Host ''
 
-Read-Host 'Enter キーを押して閉じます'
+Read-Host 'Press Enter to close'

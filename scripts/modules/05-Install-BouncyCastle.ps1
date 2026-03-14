@@ -1,4 +1,4 @@
-# ステップ 5: BouncyCastle ライブラリのダウンロード
+﻿# ステップ 5: BouncyCastle ライブラリのダウンロード
 # Maven Central から bcprov・bcutil・bcpkix をダウンロードして C:\NicoCache_nl\lib に配置する
 
 function Invoke-Step05 {

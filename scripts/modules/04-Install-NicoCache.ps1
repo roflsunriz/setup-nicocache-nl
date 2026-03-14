@@ -1,4 +1,4 @@
-# ステップ 4: NicoCache_nl 本体のインストール
+﻿# ステップ 4: NicoCache_nl 本体のインストール
 # 避難所アップローダからダウンロードして展開する
 
 function Invoke-Step04 {

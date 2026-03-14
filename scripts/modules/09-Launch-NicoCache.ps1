@@ -1,4 +1,4 @@
-# ステップ 9: NicoCache_nl の起動
+﻿# ステップ 9: NicoCache_nl の起動
 # ランチャースクリプト (RunNicoCache.ps1) を通じて NicoCache_nl を起動する
 
 function Invoke-Step09 {
