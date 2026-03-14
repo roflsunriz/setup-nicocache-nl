@@ -8,6 +8,33 @@
 > 
 > 最新情報は [NicoCache 本スレ](https://ff2ch.syoboi.jp/?q=NicoCache) を参照。
 
+## PowerShell インストールスクリプト
+
+全手順を自動化するインストールスクリプト。詳しい使い方は [PowerShell インストールスクリプト](fast-installer.md) を参照。
+
+### ダウンロードして実行
+
+スクリプトをローカルに保存してから実行する方法。PowerShell 7 (`pwsh`) が必要。
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" -OutFile "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
+pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
+```
+
+### ネットワーク経由で直接実行
+
+ダウンロード不要のワンライナー。PowerShell 7 (`pwsh`) が必要。
+
+```powershell
+irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" | iex
+```
+
+---
+
+## 個別パッケージ（手動インストール用）
+
+スクリプトを使わずに手動でセットアップする場合や、特定のコンポーネントだけを更新する場合に参照。
+
 ## Eclipse Temurin OpenJDK
 
 [Eclipse Temurin OpenJDK (JDK17 LTS)](https://adoptium.net/temurin/releases/?os=windows&arch=x64&package=jdk&version=17)
@@ -46,17 +73,6 @@ Invoke-WebRequest -Uri "https://dlcdn.apache.org//ant/binaries/apache-ant-1.10.1
 Move-Item -Path "C:\NicoCache_nl\WorkingDirectory\apache-ant-1.10.15" -Destination "C:\ant"
 ```
 
-## 高速インストーラ
-
-[NicoCache_nl-Setup.exe (2025/06/23 版)](https://www.dropbox.com/scl/fi/phqqtgfzb3yxsgzml54i2/NicoCache_nl-Setup.exe?rlkey=07d3x698ul6nnxsp7jzl042rz&st=nslk4ige&dl=1)
-
-```powershell
-Set-Location $env:USERPROFILE\Downloads
-Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/phqqtgfzb3yxsgzml54i2/NicoCache_nl-Setup.exe?rlkey=07d3x698ul6nnxsp7jzl042rz&st=nslk4ige&dl=1" -OutFile "NicoCache_nl-Setup.exe"
-```
-
-使い方は[高速インストーラ](fast-installer.md)を参照。
-
 ## 7-zip
 
 [7-zip](https://7-zip.opensource.jp/)
@@ -79,15 +95,3 @@ Invoke-WebRequest -Uri "https://nicocache.jpn.org/download.php?id=19&key=514e8a4
 
 - [https://nicocache.jpn.org/second/](https://nicocache.jpn.org/second/)
 - [https://nicocache.jpn.org/hofu/](https://nicocache.jpn.org/hofu/)
-
-## Prebuilt Package
-
-パワーユーザー（コンピュータの専門家）向け。JDK をインストールできない環境での一時利用を想定。サポートなし・ドキュメントなし。
-
-[Prebuilt.7z](https://www.dropbox.com/scl/fi/i94h472mz0mguap355pqv/Prebuilt.7z?rlkey=472b7xbgnghh42599mujhhrec&st=caa8dyia&dl=1)
-
-```powershell
-Set-Location "C:\NicoCache_nl\WorkingDirectory"
-Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/i94h472mz0mguap355pqv/Prebuilt.7z?rlkey=472b7xbgnghh42599mujhhrec&st=caa8dyia&dl=1" -OutFile "Prebuilt.7z"
-7z x "Prebuilt.7z"
-```

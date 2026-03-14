@@ -26,6 +26,47 @@ NicoCache_nl の公式セットアップガイドです。
 | [トラブルシューティング](docs/trouble-shooting.md) | 問題の診断と解決手順 |
 | [サポートサイト](docs/support-site.md) | 公式サイト・スレッドへのリンク |
 
+## PowerShell インストールスクリプト
+
+NicoCache_nl のセットアップを自動化する PowerShell スクリプトを `scripts/` ディレクトリに収録しています。
+
+### 事前準備（初回のみ）
+
+PowerShell 7 のインストールとスクリプト実行ポリシーの変更をまとめて行います。  
+**Windows PowerShell（powershell.exe）から実行できます。PowerShell 7 は不要です。**
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Enable-ScriptExecution.ps1" -OutFile "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
+powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
+```
+
+完了後はターミナルを閉じて、「Windowsキー + R」→ `pwsh` で PowerShell 7 を起動してください。
+
+### ダウンロードして実行
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" -OutFile "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
+pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
+```
+
+### ネットワーク経由で直接実行（PowerShell 7 が必要）
+
+```powershell
+irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" | iex
+```
+
+### DryRun で事前確認
+
+実際の変更を行わずに実行内容を確認できます：
+
+```powershell
+pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1" -DryRun
+```
+
+詳しい使い方は [PowerShell インストールスクリプト](docs/fast-installer.md) を参照してください。
+
+---
+
 ## ローカルでプレビューする
 
 Python 3.12 以上が必要です。
