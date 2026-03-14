@@ -1,4 +1,4 @@
-﻿# ステップ 7: 設定ファイルの初期化
+# ステップ 7: 設定ファイルの初期化
 # proxy.pac の作成・NicoCacheGUI.property の設定変更
 
 function Invoke-Step07 {
@@ -18,19 +18,35 @@ function Invoke-Step07 {
             }
         }
 
-        Invoke-Action -Description "NicoCacheGUI.property の HideWindow / LogWindowAlwaysOnTop を設定します" -DryRun:$DryRun -Action {
+        Invoke-Action -Description "NicoCacheGUI.property を作成/更新します（HideWindow / LogWindowAlwaysOnTop）" -DryRun:$DryRun -Action {
             $propFile = "$ncDir\NicoCacheGUI.property"
-            if (Test-Path -LiteralPath $propFile) {
-                $content = Get-Content -LiteralPath $propFile -Encoding utf8
-                $content = $content `
-                    -replace '^HideWindow=.*',          'HideWindow=true' `
-                    -replace '^LogWindowAlwaysOnTop=.*', 'LogWindowAlwaysOnTop=false'
-                $content | Set-Content -LiteralPath $propFile -Encoding utf8
+            $settings = [ordered]@{
+                HideWindow           = 'true'
+                LogWindowAlwaysOnTop = 'false'
+            }
+
+            if (-not (Test-Path -LiteralPath $propFile)) {
+                # ファイルが存在しない場合はデフォルト値で新規作成する
+                $settings.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" } |
+                    Set-Content -LiteralPath $propFile -Encoding utf8
+            } else {
+                # ファイルが存在する場合は既存キーを置換、未存在キーは末尾に追記する
+                [string[]]$lines = Get-Content -LiteralPath $propFile -Encoding utf8
+                foreach ($entry in $settings.GetEnumerator()) {
+                    $key = $entry.Key
+                    $val = $entry.Value
+                    if ($lines -match "^$key=") {
+                        $lines = $lines -replace "^$key=.*", "$key=$val"
+                    } else {
+                        $lines += "$key=$val"
+                    }
+                }
+                $lines | Set-Content -LiteralPath $propFile -Encoding utf8
             }
         }
 
         return New-StepResult -Step $stepName -Status 'Success' `
-            -Message 'proxy.pac を作成し、NicoCacheGUI.property を設定しました'
+            -Message 'proxy.pac を作成し、NicoCacheGUI.property を作成/更新しました'
     } catch {
         return New-StepResult -Step $stepName -Status 'Failed' -Message $_.Exception.Message
     }
