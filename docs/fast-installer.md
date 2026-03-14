@@ -2,7 +2,7 @@
 <div style="text-align: right;">最終更新日：2026/03/14</div>
 ---
 
-[install.md](install.md) の全手順を自動化した PowerShell スクリプトを使って NicoCache_nl をセットアップする方法を説明します。
+[install.md](install.md) の全手順を自動化した PowerShell スクリプトを使って NicoCache_nl をセットアップする方法を説明する。
 
 ## 自動実行される作業
 
@@ -20,12 +20,12 @@
 
 > [!NOTE]
 > 
-> Firefox への CA 証明書インポートは GUI 操作が必要なため自動化されていません。スクリプト実行後に手動でインポートしてください（スクリプトが手順を案内します）。
+> Firefox への CA 証明書インポートは GUI 操作が必要なため自動化されていない。スクリプト実行後に手動でインポートするべきであり、スクリプトが手順を案内する。
 
 ## 事前準備: PowerShell 7 のインストールと実行ポリシーの変更
 
-初回のみ必要です。PowerShell 7 のインストールとスクリプト実行ポリシーの変更をまとめて行います。  
-**Windows PowerShell（powershell.exe）から実行できます。PowerShell 7 は不要です。**
+初回のみ必要である。PowerShell 7 のインストールとスクリプト実行ポリシーの変更をまとめて行う。  
+**Windows PowerShell（powershell.exe）から実行できる。このスクリプトだけはPowerShell 7 が必要ではない。**
 
 1. 「Windowsキー + R」を押して「ファイル名を指定して実行」を開く
 2. `powershell` と入力して Enter
@@ -36,9 +36,9 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicoc
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
 ```
 
-UAC プロンプトが表示されたら「はい」を選択してください。完了後に案内される通り、ターミナルを閉じて `pwsh` で再起動してください。
+UAC プロンプトが表示されたら「はい」を選択する。完了後に案内される通り、ターミナルを閉じて `pwsh` で再起動する。
 
-4. ターミナルのデフォルトプロファイルをPowerShell 7に変更します。
+4. ターミナルのデフォルトプロファイルをPowerShell 7に変更する。
 5. 「+」 -> 「設定」 -> 「スタートアップ」 -> 「デフォルトのプロファイル」を「Powershell」（Windows PowerShellではない）に変更する
 6. ターミナルを再起動する（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
 
@@ -57,15 +57,15 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicoc
 pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
 ```
 
-UAC プロンプトが表示されたら「はい」を選択してください。スクリプトが管理者権限で再起動して処理を開始します。
+UAC プロンプトが表示されたら「はい」を選択する。スクリプトが管理者権限で再起動して処理を開始する。
 
 ---
 
 ## 方法 2: ネットワーク経由で直接実行
 
-ダウンロード不要でワンライナーで実行できます。PowerShell 7 (`pwsh`) が必要です。
+ダウンロード不要でワンライナーで実行できる。PowerShell 7 (`pwsh`) が必要である。
 
-PowerShell 7 未インストールの場合・実行ポリシーが未設定の場合は、先に[事前準備: PowerShell 7 のインストールと実行ポリシーの変更](#事前準備-powershell-7-のインストールと実行ポリシーの変更)を行ってください。
+PowerShell 7 未インストールの場合・実行ポリシーが未設定の場合は、先に[事前準備: PowerShell 7 のインストールと実行ポリシーの変更](#事前準備-powershell-7-のインストールと実行ポリシーの変更)を行う。
 
 ---
 
@@ -80,14 +80,14 @@ iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocac
 
 ## `-DryRun` オプション: 実行前の動作確認
 
-実際の変更を行わず、スクリプトが何をするかを事前に確認できます。
+実際の変更を行わず、スクリプトが何をするかを事前に確認できる。
 
 ```powershell
 # ダウンロードして DryRun 確認（推奨）
 pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1" -DryRun
 ```
 
-ネットワーク経由で DryRun を行う場合は、一時ファイルに保存してから実行してください：
+ネットワーク経由で DryRun を行う場合は、一時ファイルに保存してから実行する：
 
 ```powershell
 $tmp = New-TemporaryFile
@@ -95,13 +95,13 @@ irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/script
 pwsh -File $tmp -DryRun
 ```
 
-DryRun モードでは `[DRY-RUN]` プレフィックス付きで実行予定の操作が表示され、ファイル・レジストリ・証明書ストアへの変更は一切行われません。
+DryRun モードでは `[DRY-RUN]` プレフィックス付きで実行予定の操作が表示され、ファイル・レジストリ・証明書ストアへの変更は一切行われない。
 
 ---
 
 ## インストール後の手順
 
-1. **Firefox への CA 証明書インポート**（スクリプト完了後に案内が表示されます）
+1. **Firefox への CA 証明書インポート**（スクリプト完了後に案内が表示される）
     - Firefox を開く
     - 設定 → プライバシーとセキュリティ → 証明書 → 証明書を表示
     - 認証局証明書タブ → インポート
@@ -110,7 +110,7 @@ DryRun モードでは `[DRY-RUN]` プレフィックス付きで実行予定の
     - Firefox を再起動する
 
 2. **本体の最新版確認**
-    インストールスクリプトに含まれる NicoCache_nl 本体は最新版ではない可能性があります。[避難所アップローダ](https://nicocache.jpn.org/)で最新版を確認し、必要に応じて上書き更新してください。
+    インストールスクリプトに含まれる NicoCache_nl 本体は最新版ではない可能性がある。[避難所アップローダ](https://nicocache.jpn.org/)で最新版を確認し、必要に応じて上書き更新する。
 
 3. **設定の調整**（任意）
-    `C:\NicoCache_nl\config.properties` を編集して設定を調整できます。デフォルト設定は `defaults` ディレクトリを参照してください。
+    `C:\NicoCache_nl\config.properties` を編集して設定を調整できる。デフォルト設定は `defaults` ディレクトリを参照して調整する。
