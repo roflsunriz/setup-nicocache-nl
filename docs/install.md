@@ -11,6 +11,7 @@ winget install Microsoft.PowerShell --source winget
 4. ターミナルを閉じる
 5. 「Windowsキー」を押し、スタートメニューから「ターミナル」を開く
 6. 「ターミナル」の「+」ボタンを押し、「設定」を開き、「スタートアップ」->「デフォルトのプロファイル」を「Powershell」（Windows PowerShellではない）に変更する
+![ターミナルの設定](../images/terminal-settings.png)
 7. ターミナルを再起動する（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
 8. Cドライブ直下に`NicoCache_nl`ディレクトリを作成する
 ```powershell
@@ -62,6 +63,7 @@ Import-Certificate -FilePath "certs/ca.cer" -CertStoreLocation "Cert:\CurrentUse
 ```
 17. Firefoxを開く
 18. 設定 > プライバシーとセキュリティ > 証明書 > 証明書を表示 > 認証局証明書 > インポート 
+![Firefoxの証明書インポート](../images/firefox-certs.png)
 19. certs/ca.cerを選択
 20. 「この認証局によるウェブサイトの識別を信頼する」にチェックを入れる
 21. Firefoxを再起動する
