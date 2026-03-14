@@ -51,6 +51,9 @@ pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
 
 ### ネットワーク経由で直接実行（PowerShell 7 が必要）
 
+> [!NOTE]
+> PowerShell 7 未インストールの場合・実行ポリシーが未設定の場合は、先に[事前準備（初回のみ）](#事前準備初回のみ)を行ってください。
+
 ```powershell
 irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" | iex
 ```
