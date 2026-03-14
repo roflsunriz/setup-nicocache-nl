@@ -40,7 +40,7 @@ iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocac
 [Eclipse Temurin OpenJDK (JDK17 LTS)](https://adoptium.net/temurin/releases/?os=windows&arch=x64&package=jdk&version=17)
 
 ```powershell
-winget install EclipseAdoptium.Temurin.17.JDK
+winget install EclipseAdoptium.Temurin.17.JDK --source winget
 ```
 
 ## FFmpeg
@@ -48,7 +48,7 @@ winget install EclipseAdoptium.Temurin.17.JDK
 [FFmpeg](https://www.gyan.dev/ffmpeg/builds/)
 
 ```powershell
-winget install Gyan.FFmpeg
+winget install Gyan.FFmpeg --source winget
 ```
 
 ## BouncyCastle
@@ -78,7 +78,7 @@ Move-Item -Path "C:\NicoCache_nl\WorkingDirectory\apache-ant-1.10.15" -Destinati
 [7-zip](https://7-zip.opensource.jp/)
 
 ```powershell
-winget install 7zip.7zip
+winget install 7zip.7zip --source winget
 ```
 
 ## メインアップローダ

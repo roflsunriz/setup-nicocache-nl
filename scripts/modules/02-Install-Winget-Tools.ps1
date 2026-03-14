@@ -1,4 +1,4 @@
-﻿# ステップ 2: 依存ツールのインストール
+# ステップ 2: 依存ツールのインストール
 # winget を使って JDK17・FFmpeg・7-zip をインストールする
 
 function Invoke-Step02 {
@@ -31,7 +31,8 @@ function Invoke-Step02 {
                     --accept-source-agreements `
                     --accept-package-agreements `
                     --silent `
-                    --disable-interactivity
+                    --disable-interactivity `
+                    --source winget
                 # 0 = 成功, -1978335189 (0x8A15002B) = 既インストール済み のどちらも正常
                 if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
                     throw "winget install $toolId が失敗しました (ExitCode: $LASTEXITCODE)"

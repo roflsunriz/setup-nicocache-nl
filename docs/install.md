@@ -4,7 +4,7 @@
 2. 出てきたウィンドウに「powershell」と打つ
 3. ターミナルが開くのでPowershell 7 をインストールする
 ```powershell
-winget install Microsoft.Powershell
+winget install Microsoft.PowerShell --source winget
 ```
 4. ターミナルを閉じる
 5. 「Windowsキー + Rキー」を同時押しする
@@ -19,13 +19,13 @@ New-Item -ItemType Directory -Path "C:\NicoCache_nl\WorkingDirectory"
 ```
 9. ターミナルでEclipse Temurin OpenJDK 17 と FFmpegをインストールする
 ```powershell
-winget install EclipseAdoptium.Temurin.17.JDK
-winget install Gyan.FFmpeg
+winget install EclipseAdoptium.Temurin.17.JDK --source winget
+winget install Gyan.FFmpeg --source winget
 ```
 10. 条項に同意してインストール[Y]し、UACが立ち上がるので許可して、インストールウィザードに従ってインストールする。（基本的に何も変更せずにインストールでOK）
 11. 7-zipをインストールする
 ```powershell
-winget install 7zip.7zip
+winget install 7zip.7zip --source winget
 ```
 12. Apache Antをダウンロードし、展開し、Cドライブ直下に`ant`ディレクトリを移動
 ```powershell
