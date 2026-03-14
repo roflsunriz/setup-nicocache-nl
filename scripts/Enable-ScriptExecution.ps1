@@ -88,7 +88,8 @@ if ($pwshCmd) {
                 --accept-source-agreements `
                 --accept-package-agreements `
                 --silent `
-                --disable-interactivity
+                --disable-interactivity `
+                --source winget
 
             # 0 = 成功, -1978335189 (0x8A15002B) = 既インストール済み のどちらも正常
             if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne -1978335189) {
