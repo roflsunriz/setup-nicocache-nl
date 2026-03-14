@@ -1,4 +1,4 @@
-﻿# ステップ 4: NicoCache_nl 本体のインストール
+# ステップ 4: NicoCache_nl 本体のインストール
 # 避難所アップローダからダウンロードして展開する
 
 function Invoke-Step04 {
@@ -33,6 +33,15 @@ function Invoke-Step04 {
                 & $7z x $ncFile -y | Out-Null
                 if ($LASTEXITCODE -ne 0) {
                     throw "7z の展開に失敗しました (ExitCode: $LASTEXITCODE)"
+                }
+                # アーカイブ内にルートディレクトリ NicoCache_nl が含まれる場合、
+                # $ncDir\NicoCache_nl\ に展開されてしまうため内容を $ncDir に昇格させる
+                $subDir = Join-Path $ncDir 'NicoCache_nl'
+                if (Test-Path -LiteralPath $subDir) {
+                    Get-ChildItem -LiteralPath $subDir | ForEach-Object {
+                        Move-Item -LiteralPath $_.FullName -Destination $ncDir -Force
+                    }
+                    Remove-Item -LiteralPath $subDir -Force
                 }
             } finally {
                 Pop-Location
