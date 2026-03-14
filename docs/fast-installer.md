@@ -1,5 +1,5 @@
 # PowerShell インストールスクリプトを使ったインストール方法
-<div style="text-align: right;">最終更新日：2026/03/14</div>
+<div style="text-align: right;">最終更新日：2026/03/15</div>
 ---
 
 [install.md](install.md) の全手順を自動化した PowerShell スクリプトを使って NicoCache_nl をセットアップする方法を説明する。
@@ -22,7 +22,7 @@
 > 
 > Firefox への CA 証明書インポートは GUI 操作が必要なため自動化されていない。スクリプト実行後に手動でインポートするべきであり、スクリプトが手順を案内する。
 
-## 事前準備: PowerShell 7 のインストールと実行ポリシーの変更
+## 事前準備: PowerShell 7 のインストールと実行ポリシーの変更 { #事前準備-powershell-7-のインストールと実行ポリシーの変更 }
 
 初回のみ必要である。PowerShell 7 のインストールとスクリプト実行ポリシーの変更をまとめて行う。  
 **Windows PowerShell（powershell.exe）から実行できる。このスクリプトだけはPowerShell 7 が必要ではない。**
@@ -40,7 +40,7 @@ UAC プロンプトが表示されたら「はい」を選択する。完了後�
 
 4. ターミナルのデフォルトプロファイルをPowerShell 7に変更する。
 5. 「+」 -> 「設定」 -> 「スタートアップ」 -> 「デフォルトのプロファイル」を「Powershell」（Windows PowerShellではない）に変更する
-![ターミナルの設定](../images/terminal-settings.png)
+![ターミナルの設定](./images/terminal-settings.png)
 6. ターミナルを再起動する（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
 
 
