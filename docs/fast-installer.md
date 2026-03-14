@@ -49,9 +49,8 @@ UAC プロンプトが表示されたら「はい」を選択してください�
 
 スクリプトをローカルに保存してから実行する方法です。
 
-1. 「Windowsキー + R」を押して「ファイル名を指定して実行」を開く
-2. `pwsh` と入力して Enter（PowerShell 7 を起動）
-3. 以下を実行する
+1. ターミナルを開く（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
+2. 以下を実行する
 
 ```powershell
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" -OutFile "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
@@ -70,7 +69,7 @@ PowerShell 7 未インストールの場合・実行ポリシーが未設定の�
 
 ---
 
-1. 「Windowsキー + R」を押して `pwsh` と入力して Enter
+1. ターミナルを開く（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
 2. 以下を実行する
 
 ```powershell
