@@ -1,4 +1,4 @@
-﻿#Requires -Version 7.0
+#Requires -Version 7.0
 <#
 .SYNOPSIS
     NicoCache_nl 自動インストーラ
@@ -20,7 +20,7 @@
 
 .EXAMPLE
     # ネットワーク経由で直接実行
-    irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" | iex
+    & ([scriptblock]::Create((irm "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1")))
 
 .EXAMPLE
     # ネットワーク経由で DryRun 確認（一時ファイルに保存してから実行）
