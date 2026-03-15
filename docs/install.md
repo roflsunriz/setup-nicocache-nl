@@ -72,10 +72,10 @@ Import-Certificate -FilePath "certs/ca.cer" -CertStoreLocation "Cert:\CurrentUse
 17. Firefoxを開く
 18. 設定 > プライバシーとセキュリティ > 証明書 > 証明書を表示 > 認証局証明書 > インポート 
 ![Firefoxの証明書インポート](./images/firefox-certs.png)
-19. certs/ca.cerを選択
-20. 「この認証局によるウェブサイトの識別を信頼する」にチェックを入れる
-21. Firefoxを再起動する
-22. `proxy_sample.pac`から`proxy.pac`を作成
+19. certs/ca.cerを選択  
+20. 「この認証局によるウェブサイトの識別を信頼する」にチェックを入れる  
+21. Firefoxを再起動する  
+22. `proxy_sample.pac`から`proxy.pac`を作成  
 ```powershell
 Set-Location "C:\NicoCache_nl"
 Copy-Item -Path "C:\NicoCache_nl\proxy_sample.pac" -Destination "C:\NicoCache_nl\proxy.pac"
