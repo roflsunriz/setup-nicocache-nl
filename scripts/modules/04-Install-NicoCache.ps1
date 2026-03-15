@@ -38,10 +38,10 @@ function Invoke-Step04 {
                 # $ncDir\NicoCache_nl\ に展開されてしまうため内容を $ncDir に昇格させる
                 $subDir = Join-Path $ncDir 'NicoCache_nl'
                 if (Test-Path -LiteralPath $subDir) {
-                    Get-ChildItem -LiteralPath $subDir | ForEach-Object {
+                    Get-ChildItem -LiteralPath $subDir -Force | ForEach-Object {
                         Move-Item -LiteralPath $_.FullName -Destination $ncDir -Force
                     }
-                    Remove-Item -LiteralPath $subDir -Force
+                    Remove-Item -LiteralPath $subDir -Recurse -Force
                 }
             } finally {
                 Pop-Location
