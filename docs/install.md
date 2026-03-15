@@ -46,8 +46,11 @@ Move-Item -Path "$env:TEMP\apache-ant-1.10.15" -Destination "C:\ant"
 Set-Location "C:\NicoCache_nl"
 Invoke-WebRequest -Uri "https://nicocache.jpn.org/download.php?id=19&key=514e8a406c60c969adc4ff934d5e65427cdc09c74cab334e543f7c96f80b4d81" -OutFile "NicoCache_nl-2026-01-15.7z"
 7z x "NicoCache_nl-2026-01-15.7z" -o"C:\NicoCache_nl" -y
-Move-Item -Path "C:\NicoCache_nl\NicoCache_nl\*" -Destination "C:\NicoCache_nl" -Force
-Remove-Item -Path "C:\NicoCache_nl\NicoCache_nl" -Recurse -Force
+$nestedDir = "C:\NicoCache_nl\NicoCache_nl"
+if (Test-Path $nestedDir) {
+    Get-ChildItem -Path $nestedDir -Force | Move-Item -Destination "C:\NicoCache_nl" -Force
+    Remove-Item -Path $nestedDir -Recurse -Force
+}
 ```
 16. BouncyCastleから依存ライブラリをダウンロードし、証明書を生成、ユーザー証明書に証明書を追加 (Chromeは自動的にWindowsの証明書を参照する)
 
