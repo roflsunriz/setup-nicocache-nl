@@ -1,5 +1,5 @@
-﻿# ステップ 8: ランチャーの作成・実行ポリシー設定・タスクスケジューラー登録
-# RunNicoCache.ps1 の生成、スクリプト実行ポリシーの設定、ログオン時自動起動タスクの登録
+# ステップ 8: ランチャーの作成・タスクスケジューラー登録
+# RunNicoCache.ps1 の生成、ログオン時自動起動タスクの登録
 
 function Invoke-Step08 {
     [CmdletBinding()]
@@ -19,10 +19,6 @@ Set-Location -Path $PSScriptRoot
 Start-Process -FilePath "javaw" -ArgumentList "-jar", "NicoCache_nl.jar"
 '@
             $launcherContent | Out-File -LiteralPath $ps1Path -Encoding utf8 -Force
-        }
-
-        Invoke-Action -Description "スクリプト実行ポリシーを RemoteSigned (LocalMachine) に設定します" -DryRun:$DryRun -Action {
-            Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
         }
 
         Invoke-Action -Description "タスクスケジューラーに '$taskName' を登録します（ログオン時自動起動）" -DryRun:$DryRun -Action {
