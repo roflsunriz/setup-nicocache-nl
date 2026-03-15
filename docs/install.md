@@ -69,7 +69,7 @@ Copy-Item -Path "C:\NicoCache_nl\config.properties.default" -Destination "C:\Nic
 Add-Content -Path "config.properties" -Value "enableMitM=true"
 Import-Certificate -FilePath "certs/ca.cer" -CertStoreLocation "Cert:\CurrentUser\Root"
 ```
-17. Firefoxを開く
+17. Firefoxを開く  
 18. 設定 > プライバシーとセキュリティ > 証明書 > 証明書を表示 > 認証局証明書 > インポート 
 ![Firefoxの証明書インポート](./images/firefox-certs.png)
 19. certs/ca.cerを選択  
