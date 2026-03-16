@@ -101,7 +101,7 @@ Copy-Item -Path "$env:NICOCACHE_HOME\proxy_sample.pac" -Destination "$env:NICOCA
 
 23. `Set-WindowsAutoProxy.ps1`をネットワーク経由で実行してWindowsを自動プロキシスクリプトに対応させる  
 ```powershell
-iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Set-WindowsAutoProxy.ps1') }" -AutoConfigUrl 'http://localhost:8080/proxy.pac' -ProxyBypassList 'localhost;127.0.0.1;<local>'
+iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Set-WindowsAutoProxy.ps1') }"
 ```
 
 24. その他、`config.properties`に変更したい設定があれば編集する。デフォルト設定は`defaults`ディレクトリに格納されている。  
