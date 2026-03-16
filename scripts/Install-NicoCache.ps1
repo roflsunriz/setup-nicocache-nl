@@ -56,6 +56,10 @@ $MODULE_FILES = @(
     'modules/09-Launch-NicoCache.ps1'
 )
 
+$AUX_FILES = @(
+    'Set-WindowsAutoProxy.ps1'
+)
+
 # =============================================================================
 # 管理者権限チェックと自動昇格
 # =============================================================================
@@ -119,6 +123,15 @@ if (-not (Test-Path -LiteralPath (Join-Path $modulesDir '00-Common.ps1'))) {
     }
     Write-Host '  モジュールのダウンロードが完了しました。' -ForegroundColor Green
     Write-Host ''
+}
+
+foreach ($auxFile in $AUX_FILES) {
+    $dest = Join-Path $scriptDir $auxFile
+    if (-not (Test-Path -LiteralPath $dest)) {
+        Write-Host "モジュール以外の補助スクリプトを取得しています: $auxFile" -ForegroundColor Yellow
+        Invoke-WebRequest -Uri "$REPO_RAW_BASE/$auxFile" -OutFile $dest
+        Write-Host "  $auxFile を保存しました。" -ForegroundColor Green
+    }
 }
 
 # dot-source でモジュールを読み込む

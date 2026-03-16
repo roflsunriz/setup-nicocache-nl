@@ -98,8 +98,14 @@ Import-Certificate -FilePath "$env:NICOCACHE_HOME\certs\ca.cer" -CertStoreLocati
 Set-Location $env:NICOCACHE_HOME
 Copy-Item -Path "$env:NICOCACHE_HOME\proxy_sample.pac" -Destination "$env:NICOCACHE_HOME\proxy.pac"
 ```
-23. その他、`config.properties`に変更したい設定があれば編集する。デフォルト設定は`defaults`ディレクトリに格納されている。  
-24. ランチャースクリプトを作成  
+
+23. `Set-WindowsAutoProxy.ps1`をネットワーク経由で実行してWindowsを自動プロキシスクリプトに対応させる  
+```powershell
+iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Set-WindowsAutoProxy.ps1') }" -AutoConfigUrl 'http://localhost:8080/proxy.pac' -ProxyBypassList 'localhost;127.0.0.1;<local>'
+```
+
+24. その他、`config.properties`に変更したい設定があれば編集する。デフォルト設定は`defaults`ディレクトリに格納されている。  
+25. ランチャースクリプトを作成  
 ```powershell
 $script = @'
 Set-Location -Path $env:NICOCACHE_HOME
@@ -107,7 +113,7 @@ Start-Process -FilePath "javaw" -ArgumentList "-jar", "NicoCache_nl.jar"
 '@
 $script | Out-File -FilePath "$env:NICOCACHE_HOME\RunNicoCache.ps1" -Encoding utf8
 ```
-25. `NicoCacheGUI.property`の設定を書き換える  
+26. `NicoCacheGUI.property`の設定を書き換える  
 ```powershell
 # NicoCacheGUI.property を作成し、設定を書き込む
 $lines = @(
@@ -116,11 +122,11 @@ $lines = @(
 )
 Set-Content -Path "$env:NICOCACHE_HOME\NicoCacheGUI.property" -Value $lines -Encoding utf8
 ```
-26. 「Windowsキー + Rキー」を同時押し -> 「ファイル名を指定して実行」ダイアログ -> 「wt」または「wt.exe」と入力 -> Ctrl + Shift + Enterキーを同時押ししてターミナルを管理者権限で起動し、以下を実行してスクリプトの実行を許可（ウィンドウにAdministratorと表示されていればOK）  
+27. 「Windowsキー + Rキー」を同時押し -> 「ファイル名を指定して実行」ダイアログ -> 「wt」または「wt.exe」と入力 -> Ctrl + Shift + Enterキーを同時押ししてターミナルを管理者権限で起動し、以下を実行してスクリプトの実行を許可（ウィンドウにAdministratorと表示されていればOK）  
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Force
 ```
-27. 続けて管理者権限で起動したターミナルでタスクスケジューラーにランチャースクリプトを登録  
+28. 続けて管理者権限で起動したターミナルでタスクスケジューラーにランチャースクリプトを登録  
 ```powershell
 $taskName = "NicoCacheAutoStart"
 $ps1Path = "$env:NICOCACHE_HOME\RunNicoCache.ps1"
@@ -128,12 +134,12 @@ $action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument "-WindowStyle Hi
 $trigger = New-ScheduledTaskTrigger -AtLogOn
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Description "NicoCacheをログオン時に起動するタスク" -Force
 ```
-28. NicoCache_nlを起動  
+29. NicoCache_nlを起動  
 ```powershell
 Set-Location $env:NICOCACHE_HOME
 Start-Process pwsh -ArgumentList "-WindowStyle Hidden -File `"$env:NICOCACHE_HOME\RunNicoCache.ps1`""
 ```
-29. インストール完了。なお、アンイストール時はCドライブ直下の`NicoCache_nl`ディレクトリを削除し、タスクスケジューラーから`NicoCacheAutoStart`を削除すればOK  
+30. インストール完了。なお、アンイストール時はCドライブ直下の`NicoCache_nl`ディレクトリを削除し、タスクスケジューラーから`NicoCacheAutoStart`を削除すればOK  
 ```powershell
 Remove-Item -Path $env:NICOCACHE_HOME -Recurse -Force
 Unregister-ScheduledTask -TaskName "NicoCacheAutoStart" -Confirm:$false

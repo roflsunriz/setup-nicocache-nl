@@ -15,6 +15,7 @@
 | BouncyCastle ライブラリのダウンロード |
 | 証明書の生成と Windows 証明書ストアへのインポート |
 | config.properties・proxy.pac の初期設定 |
+| Windows の自動プロキシ設定（http://localhost:8080/proxy.pac） |
 | NicoCacheGUI.property の設定 |
 | RunNicoCache.ps1 ランチャー生成・タスクスケジューラー登録 |
 

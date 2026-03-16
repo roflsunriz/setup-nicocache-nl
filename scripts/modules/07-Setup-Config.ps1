@@ -7,6 +7,9 @@ function Invoke-Step07 {
 
     $stepName = '設定ファイルの初期化'
     $ncDir    = 'C:\NicoCache_nl'
+    $moduleDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+    $installerRoot = Split-Path -Parent $moduleDir
+    $autoProxyScript = Join-Path $installerRoot 'Set-WindowsAutoProxy.ps1'
 
     Write-StepHeader "ステップ 7: $stepName"
 
@@ -16,6 +19,13 @@ function Invoke-Step07 {
             if (-not (Test-Path -LiteralPath $dest)) {
                 Copy-Item -LiteralPath "$ncDir\proxy_sample.pac" -Destination $dest
             }
+        }
+
+        if (-not (Test-Path -LiteralPath $autoProxyScript)) {
+            throw "自動プロキシ設定スクリプトが見つかりません: $autoProxyScript"
+        }
+        Invoke-Action -Description "http://localhost:8080/proxy.pac を使う自動プロキシ設定スクリプトを実行します" -DryRun:$DryRun -Action {
+            & $autoProxyScript -AutoConfigUrl 'http://localhost:8080/proxy.pac' -ProxyBypassList 'localhost;127.0.0.1;<local>' -DryRun:$DryRun
         }
 
         Invoke-Action -Description "NicoCacheGUI.property を作成/更新します（HideWindow / LogWindowAlwaysOnTop）" -DryRun:$DryRun -Action {
@@ -46,7 +56,7 @@ function Invoke-Step07 {
         }
 
         return New-StepResult -Step $stepName -Status 'Success' `
-            -Message 'proxy.pac を作成し、NicoCacheGUI.property を作成/更新しました'
+            -Message 'proxy.pac を作成し、Windows の自動プロキシ設定（http://localhost:8080/proxy.pac）と NicoCacheGUI.property を作成/更新しました'
     } catch {
         return New-StepResult -Step $stepName -Status 'Failed' -Message $_.Exception.Message
     }
