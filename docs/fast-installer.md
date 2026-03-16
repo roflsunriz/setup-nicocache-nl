@@ -16,7 +16,7 @@
 | 証明書の生成と Windows 証明書ストアへのインポート |
 | config.properties・proxy.pac の初期設定 |
 | NicoCacheGUI.property の設定 |
-| RunNicoCache.ps1 ランチャー生成・スクリプト実行ポリシー設定・タスクスケジューラー登録 |
+| RunNicoCache.ps1 ランチャー生成・タスクスケジューラー登録 |
 
 !!! warning
     genCerts.batの実行フェーズでは`pause`が入るので`Enter`等のキーボード操作が必要。
