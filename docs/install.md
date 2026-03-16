@@ -56,7 +56,7 @@ $targetURL = "https://nicocache.jpn.org/download.php?id=19&key=514e8a406c60c969a
 
 Set-Location $env:NICOCACHE_HOME
 Invoke-WebRequest -Uri $targetURL -OutFile "NicoCache_nl-$($ncVersion).7z"
-7z x "NicoCache_nl-$($ncVersion).7z" -o$env:NICOCACHE_HOME -y
+7z x "NicoCache_nl-$($ncVersion).7z" "-o$env:NICOCACHE_HOME" -y
 $nestedDir = "$env:NICOCACHE_HOME\NicoCache_nl"
 if (Test-Path $nestedDir) {
     Get-ChildItem -Path $nestedDir -Force | Move-Item -Destination $env:NICOCACHE_HOME -Force
