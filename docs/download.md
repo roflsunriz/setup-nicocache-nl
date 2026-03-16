@@ -97,6 +97,13 @@ $ncDir = "C:\NicoCache_nl"
 Set-Location $ncDir
 Invoke-WebRequest -Uri $targetURL -OutFile "$ncDir\NicoCache_nl-$($ncVersion).7z"
 7z x "$ncDir\NicoCache_nl-$($ncVersion).7z" -o$ncDir -y
+$nestedDir = "$ncDir\NicoCache_nl"
+if (Test-Path $nestedDir) {
+    
+Get-ChildItem -Path $nestedDir -Force | Move-Item -Destination $ncDir -Force
+    
+Remove-Item -Path $nestedDir -Recurse -Force
+}
 ```
 
 ## 旧アップローダのミラー
