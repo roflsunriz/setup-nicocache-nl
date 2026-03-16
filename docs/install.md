@@ -98,12 +98,10 @@ Import-Certificate -FilePath "$env:NICOCACHE_HOME\certs\ca.cer" -CertStoreLocati
 Set-Location $env:NICOCACHE_HOME
 Copy-Item -Path "$env:NICOCACHE_HOME\proxy_sample.pac" -Destination "$env:NICOCACHE_HOME\proxy.pac"
 ```
-
 23. `Set-WindowsAutoProxy.ps1`をネットワーク経由で実行してWindowsを自動プロキシスクリプトに対応させる  
 ```powershell
 iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Set-WindowsAutoProxy.ps1') }"
 ```
-
 24. その他、`config.properties`に変更したい設定があれば編集する。デフォルト設定は`defaults`ディレクトリに格納されている。  
 25. ランチャースクリプトを作成  
 ```powershell
