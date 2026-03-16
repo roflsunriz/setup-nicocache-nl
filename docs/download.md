@@ -92,10 +92,11 @@ winget upgrade 7zip.7zip --source winget
 # バージョンを指定 (YYYY-MM-DD形式)
 $ncVersion = "2026-01-15"
 $targetURL = "https://nicocache.jpn.org/download.php?id=19&key=514e8a406c60c969adc4ff934d5e65427cdc09c74cab334e543f7c96f80b4d81"
+$ncDir = "C:\NicoCache_nl"
 
-Set-Location $env:NICOCACHE_HOME
-Invoke-WebRequest -Uri $targetURL -OutFile "$env:NICOCACHE_HOME\NicoCache_nl-$($ncVersion).7z"
-7z x "$env:NICOCACHE_HOME\NicoCache_nl-$($ncVersion).7z" -o$env:NICOCACHE_HOME -y
+Set-Location $ncDir
+Invoke-WebRequest -Uri $targetURL -OutFile "$ncDir\NicoCache_nl-$($ncVersion).7z"
+7z x "$ncDir\NicoCache_nl-$($ncVersion).7z" -o$ncDir -y
 ```
 
 ## 旧アップローダのミラー
