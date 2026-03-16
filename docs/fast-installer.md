@@ -1,5 +1,5 @@
 # PowerShell インストールスクリプトを使ったインストール方法
-<div style="text-align: right;">最終更新日：2026/03/15</div>
+<div style="text-align: right;">最終更新日：2026/03/17</div>
 ---
 
 [install.md](install.md) の全手順を自動化した PowerShell スクリプトを使って NicoCache_nl をセットアップする方法を説明する。
@@ -28,7 +28,9 @@
 
 !!! note "Firefoxへの証明書インポートは手動での作業が必要"
 
-    Firefox への CA 証明書インポートは 手動でのインポート作業が必要
+    設定 → プライバシーとセキュリティ → 証明書 → 証明書を表示 → 認証局証明書タブ → ca.cerをインポート →
+
+    「この認証局によるウェブサイトの識別を信頼する」にチェック → Firefox再起動で適用
 
 ## 事前準備: PowerShell 7 のインストールと実行ポリシーの変更 { #事前準備-powershell-7-のインストールと実行ポリシーの変更 }
 
@@ -36,7 +38,7 @@
 **Windows PowerShell　6.2（powershell.exe）から実行可能。**
 
 1. 「Windowsキー + R」を押して「ファイル名を指定して実行」を開く
-2. `powershell` と入力して Enter
+2. `wt` または `wt.exe` と入力して Enter
 3. 以下を実行する
 
 ```powershell
@@ -44,9 +46,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicoc
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
 ```
 
-UAC プロンプトが表示されたら「はい」を選択する。完了後に案内される通り、ターミナルを閉じて Powershell 7 で再起動する。
-
-4. ターミナルのデフォルトプロファイルをPowerShell 7に変更する。
+4. UAC プロンプトが表示されたら「はい」を選択する。
 5. 「∨」 -> 「設定」 -> 「スタートアップ」 -> 「デフォルトのプロファイル」を「Powershell」（Windows PowerShellではない）に変更する
 ![ターミナルの設定](./images/terminal-settings.png)
 6. ターミナルを再起動する（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
@@ -58,7 +58,7 @@ UAC プロンプトが表示されたら「はい」を選択する。完了後�
 
 スクリプトをローカルに保存してから実行する方法。
 
-1. ターミナルを開く（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
+1. 「Windowsキー + R」を押して「ファイル名を指定して実行」ダイアログで `wt` または `wt.exe` と入力してターミナルを開く（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
 2. 以下を実行する
 
 ```powershell
@@ -78,7 +78,7 @@ PowerShell 7 未インストールの場合・実行ポリシーが未設定の�
 
 ---
 
-1. ターミナルを開く（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
+1. Windowsキー + R」を押して「ファイル名を指定して実行」ダイアログで `wt` または `wt.exe` と入力してターミナルを開く（ターミナルの表示にPowershell 7.5.5のようなバージョンが表示されていればOK）
 2. 以下を実行する
 
 ```powershell
@@ -122,4 +122,4 @@ DryRun モードでは `[DRY-RUN]` プレフィックス付きで実行予定の
     インストールスクリプトに含まれる NicoCache_nl 本体は最新版ではない可能性がある。[避難所アップローダ](https://nicocache.jpn.org/)で最新版を確認し、必要に応じて上書き更新する。
 
 3. **設定の調整**（任意）
-    `C:\NicoCache_nl\config.properties` を編集して設定を調整できる。デフォルト設定は `defaults` ディレクトリを参照して調整する。
+    `C:\NicoCache_nl\config.properties` を編集して設定を調整できる。各種設定値は `defaults` ディレクトリを参照して設定値を `config.properties` に書き込んで調整する。
