@@ -56,6 +56,7 @@ nav:
     - 通常インストール(Win): install-win.md
     - 通常インストール(Linux): install-linux.md
     - 通常インストール(Mac): install-mac.md
+    - 通常インストール(Solaris): install-solaris.md
     - 簡単インストーラー(Win): fast-installer-win.md
   - アップデート: update.md
   - nlFilters:
