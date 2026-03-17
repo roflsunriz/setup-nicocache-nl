@@ -12,7 +12,7 @@
 
 全手順を自動化するインストールスクリプト。  
 
-詳しい使い方は [PowerShell インストールスクリプト](fast-installer.md) を参照。  
+詳しい使い方は [PowerShell インストールスクリプト(Windows)](fast-installer-win.md) を参照。  
 
 ---
 

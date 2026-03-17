@@ -53,8 +53,10 @@ nav:
   - ホーム: index.md
   - ダウンロード: download.md
   - インストール:
-    - 通常インストール: install.md
-    - 簡単インストーラー: fast-installer.md
+    - 通常インストール(Win): install-win.md
+    - 通常インストール(Linux): install-linux.md
+    - 通常インストール(Mac): install-mac.md
+    - 簡単インストーラー(Win): fast-installer-win.md
   - アップデート: update.md
   - nlFilters:
     - 概要: nl-filters.md

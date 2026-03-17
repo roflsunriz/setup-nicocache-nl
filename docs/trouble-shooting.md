@@ -1,5 +1,5 @@
 # トラブルシューティング
-<div style="text-align: right;">最終更新日：2026/03/15</div>
+<div style="text-align: right;">最終更新日：2026/03/17</div>
 ---
 
 以下の手順を0から順に実行して、原因を特定する。  
@@ -164,7 +164,7 @@ watchページのキャッシュメニューから動画キャッシュの削除
 `http://127.0.0.1:8080/` にアクセスして確認する。
 
 - バージョン情報 `NicoCache_nl version 2026-01-15` が表示される → プロキシ設定は正常
-- 表示できない → [インストール](install.md) を参照
+- 表示できない → [通常インストール(Windows)](install-win.md) を参照
 
 > `config.properties` に `localFileServer = true` が設定されていること（デフォルトでは設定済み）。
 
