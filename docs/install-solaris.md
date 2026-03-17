@@ -99,17 +99,11 @@ echo "enableMitM=true" >> "$NICOCACHE_HOME/config.properties"
 sudo cp "$NICOCACHE_HOME/certs/ca.cer" /etc/certs/CA/nicocache-nl.pem
 sudo svcadm restart /system/ca-certificates
 ```
-10. Firefox を開く  
-11. 設定 > プライバシーとセキュリティ > 証明書 > 証明書を表示 > 認証局証明書 > インポート  
-![Firefoxの証明書インポート](./images/firefox-certs.png)
-12. `~/NicoCache_nl/certs/ca.cer` を選択  
-13. 「この認証局によるウェブサイトの識別を信頼する」にチェックを入れる  
-14. Firefox を再起動する  
-15. `proxy_sample.pac` から `proxy.pac` を作成  
+10. `proxy_sample.pac` から `proxy.pac` を作成  
 ```bash
 cp "$NICOCACHE_HOME/proxy_sample.pac" "$NICOCACHE_HOME/proxy.pac"
 ```
-16. システムのプロキシ設定で自動プロキシスクリプトを `http://localhost:8080/proxy.pac` に設定する  
+11. システムのプロキシ設定で自動プロキシスクリプトを `http://localhost:8080/proxy.pac` に設定する  
 **GNOME デスクトップ:**  
 ```bash
 gsettings set org.gnome.system.proxy mode 'auto'
@@ -119,8 +113,8 @@ gsettings set org.gnome.system.proxy autoconfig-url 'http://localhost:8080/proxy
 ```bash
 sudo sh -c 'echo "AUTOMOUNT_PROXY=http://localhost:8080/proxy.pac" >> /etc/default/proxy'
 ```
-17. その他、`config.properties` に変更したい設定があれば編集する。デフォルト設定は `defaults` ディレクトリに格納されている。  
-18. ランチャースクリプトを作成する  
+12. その他、`config.properties` に変更したい設定があれば編集する。デフォルト設定は `defaults` ディレクトリに格納されている。  
+13. ランチャースクリプトを作成する  
 ```bash
 cat > "$NICOCACHE_HOME/run-nicocache.sh" << EOF
 #!/bin/bash
@@ -129,14 +123,14 @@ java -jar NicoCache_nl.jar &
 EOF
 chmod +x "$NICOCACHE_HOME/run-nicocache.sh"
 ```
-19. `NicoCacheGUI.property` の設定を書き込む  
+14. `NicoCacheGUI.property` の設定を書き込む  
 ```bash
 cat > "$NICOCACHE_HOME/NicoCacheGUI.property" << 'EOF'
 HideWindow=true
 LogWindowAlwaysOnTop=false
 EOF
 ```
-20. SMF (Service Management Facility) サービスとして登録してログイン時に自動起動させる  
+15. SMF (Service Management Facility) サービスとして登録してログイン時に自動起動させる  
 ```bash
 # SMF マニフェストを作成
 cat > /tmp/nicocache.xml << EOF
@@ -171,11 +165,11 @@ EOF
 sudo svccfg import /tmp/nicocache.xml
 sudo svcadm enable application/nicocache:default
 ```
-21. NicoCache_nl が起動していることを確認する  
+16. NicoCache_nl が起動していることを確認する  
 ```bash
 svcs application/nicocache
 ```
-22. インストール完了。アンインストール時は以下を実行する  
+17. インストール完了。アンインストール時は以下を実行する  
 ```bash
 sudo svcadm disable application/nicocache:default
 sudo svccfg delete application/nicocache
