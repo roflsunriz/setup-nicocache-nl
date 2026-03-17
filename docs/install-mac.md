@@ -83,18 +83,15 @@ sudo security add-trusted-cert -d -r trustRoot \
 cp "$NICOCACHE_HOME/proxy_sample.pac" "$NICOCACHE_HOME/proxy.pac"
 ```
 15. システムのネットワーク設定で自動プロキシスクリプトを設定する  
-
-    **GUI 操作:**  
-    システム設定 → ネットワーク → 使用中のネットワーク → 詳細 → プロキシ →  
-    「自動プロキシ設定」にチェックを入れ、URL に `http://localhost:8080/proxy.pac` を入力 → OK → 適用  
-
-    **コマンドラインで設定する場合（Wi-Fi の場合）:**
-    ```bash
-    NETWORK_SERVICE="Wi-Fi"
-    sudo networksetup -setautoproxyurl "$NETWORK_SERVICE" "http://localhost:8080/proxy.pac"
-    sudo networksetup -setautoproxystate "$NETWORK_SERVICE" on
-    ```
-
+**GUI 操作:**  
+システム設定 → ネットワーク → 使用中のネットワーク → 詳細 → プロキシ →  
+「自動プロキシ設定」にチェックを入れ、URL に `http://localhost:8080/proxy.pac` を入力 → OK → 適用  
+**コマンドラインで設定する場合（Wi-Fi の場合）:**  
+```bash
+NETWORK_SERVICE="Wi-Fi"
+sudo networksetup -setautoproxyurl "$NETWORK_SERVICE" "http://localhost:8080/proxy.pac"
+sudo networksetup -setautoproxystate "$NETWORK_SERVICE" on
+```
 16. その他、`config.properties` に変更したい設定があれば編集する。デフォルト設定は `defaults` ディレクトリに格納されている。  
 17. ランチャースクリプトを作成する  
 ```bash

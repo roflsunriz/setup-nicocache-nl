@@ -102,16 +102,13 @@ sudo update-ca-certificates
 cp "$NICOCACHE_HOME/proxy_sample.pac" "$NICOCACHE_HOME/proxy.pac"
 ```
 15. システムのプロキシ設定で自動プロキシスクリプトを `http://localhost:8080/proxy.pac` に設定する  
-
-    **GNOME (Ubuntu 等):**
-    ```bash
-    gsettings set org.gnome.system.proxy mode 'auto'
-    gsettings set org.gnome.system.proxy autoconfig-url 'http://localhost:8080/proxy.pac'
-    ```
-
-    **KDE Plasma:**  
-    システム設定 → ネットワーク → プロキシ → 「自動プロキシ設定スクリプトの URL」に `http://localhost:8080/proxy.pac` を入力する。
-
+**GNOME (Ubuntu 等):**  
+```bash
+gsettings set org.gnome.system.proxy mode 'auto'
+gsettings set org.gnome.system.proxy autoconfig-url 'http://localhost:8080/proxy.pac'
+```
+**KDE Plasma:**  
+システム設定 → ネットワーク → プロキシ → 「自動プロキシ設定スクリプトの URL」に `http://localhost:8080/proxy.pac` を入力する。  
 16. その他、`config.properties` に変更したい設定があれば編集する。デフォルト設定は `defaults` ディレクトリに格納されている。  
 17. ランチャースクリプトを作成する  
 ```bash
