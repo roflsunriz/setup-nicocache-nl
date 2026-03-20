@@ -123,9 +123,9 @@ Remove-Item -Path $nestedDir -Recurse -Force
 - [https://github.com/roflsunriz/filter-matome/releases](https://github.com/roflsunriz/filter-matome/releases)
 
 ```powershell
-# GitHubリリースの最新アセット（zip/7z/exe等）を取得し、自動でダウンロードフォルダにダウンロード&展開
+# GitHubリリースの最新アセット（7zファイル）を取得し、自動でダウンロードフォルダにダウンロード&展開
 
-# 例: リリース対象のGitHubリポジトリURL (必要に応じて変更)
+# リリース対象のGitHubリポジトリURL
 $repoOwner = "roflsunriz"
 $repoName = "filter-matome"
 $apiUrl = "https://api.github.com/repos/$repoOwner/$repoName/releases/latest"
@@ -136,8 +136,8 @@ $downloadDir = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
 # 最新リリース情報を取得
 $release = Invoke-WebRequest -Uri $apiUrl -UseBasicParsing | ConvertFrom-Json
 
-# 一番最初のアセット（.7z または .zip。見つからない場合は 1 番目のアセット）のURLを取得
-$asset = $release.assets | Where-Object { $_.name -match "\.(7z|zip)$" } | Select-Object -First 1
+# 一番最初のアセット（.7z）のURLを取得
+$asset = $release.assets | Where-Object { $_.name -match "\.7z$" } | Select-Object -First 1
 if (-not $asset) { $asset = $release.assets | Select-Object -First 1 }
 
 $downloadUrl = $asset.browser_download_url
@@ -148,13 +148,13 @@ Write-Output "最新リリースファイル [$fileName] をダウンロード�
 
 Invoke-WebRequest -Uri $downloadUrl -OutFile $destPath
 
-# 7-Zipで展開（7z.exeへのパスが通っている前提）
+# 7-Zipで展開
 Write-Output "7-Zipで展開中..."
 & 7z x $destPath "-o$downloadDir" -y
 
 Write-Output "完了: $fileName が $downloadDir に展開されました。"
 ```
-# 補足
-# - 7zipがインストールされていて、コマンドライン(7z.exe)がパスに通っている必要があります。
-# - 必要に応じて $repoOwner と $repoName を書き換えてください。
+
+補足  
+- 7zipがインストールされていて、コマンドライン(7z.exe)がパスに通っている必要があります。    
 
