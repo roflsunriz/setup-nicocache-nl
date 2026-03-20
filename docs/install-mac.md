@@ -1,7 +1,4 @@
 # NicoCache_nl のインストール(macOS)
-<div style="text-align: right;">最終更新日：2026/03/17</div>
----
-
 !!! note "対象バージョン"
     macOS 13 Ventura 以降を対象としています。デフォルトシェルは **zsh** を前提としています。
 

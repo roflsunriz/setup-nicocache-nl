@@ -1,7 +1,4 @@
 # ダウンロード
-<div style="text-align: right;">最終更新日：2026/03/17</div>
----
-
 !!! warning "常に最新版を確認すること"
 
     これらのパッケージは最新ではない可能性がある。 必ず[アップローダ](https://nicocache.jpn.org/)を確認すること。

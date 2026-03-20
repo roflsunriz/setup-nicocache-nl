@@ -1,7 +1,4 @@
 # NicoCache_nl のインストール(Windows)
-<div style="text-align: right;">最終更新日：2026/03/17</div>
----
-
 1. 「Windowsキー + Rキー」を同時押しする  
 2. 出てきたウィンドウに「wt」または「wt.exe」と打つ  
 3. Windows ターミナルが開くのでPowershell 7 をインストールする  

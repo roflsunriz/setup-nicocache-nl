@@ -1,7 +1,4 @@
 # PowerShell インストールスクリプトを使ったインストール方法(Windows)
-<div style="text-align: right;">最終更新日：2026/03/17</div>
----
-
 [通常インストール(Windows)](install-win.md) の全手順を自動化した PowerShell スクリプトを使って NicoCache_nl をセットアップする方法を説明する。
 
 ## 自動実行される作業

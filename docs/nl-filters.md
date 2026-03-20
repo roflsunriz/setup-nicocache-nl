@@ -1,6 +1,3 @@
-<div style="text-align: right;">最終更新日：2026/03/14</div>
----
-
 # nlFiltersとは？
 nlFiltersはNicoCacheのページ書き換え機能である。ニコニコ動画の好きなページに任意のスタイルやスクリプトやHTMLスニペットを埋め込むことが可能である。
 

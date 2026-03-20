@@ -32,6 +32,16 @@ theme:
     - content.code.copy
     - content.code.annotate
 
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: custom
+      custom_format: "%Y/%m/%d"
+      timezone: Asia/Tokyo
+      fallback_to_build_date: false
+      strict: true
+      enabled: !ENV [ENABLED_GIT_DATES, true]
+
 markdown_extensions:
   - admonition
   - pymdownx.details

@@ -1,7 +1,4 @@
 # NicoCache_nl のインストール(Linux)
-<div style="text-align: right;">最終更新日：2026/03/17</div>
----
-
 !!! note "対象ディストリビューション"
     このガイドは **Debian/Ubuntu 系** (apt) を主対象としています。  
     Fedora/RHEL 系は `apt` を `dnf` に、パッケージ名を適宜読み替えてください。

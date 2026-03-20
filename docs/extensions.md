@@ -1,7 +1,4 @@
 # extensionsのインストール方法
-<div style="text-align: right;">最終更新日：2026/03/15</div>
----
-
 ## extensionsとは？
 extensionsはNicoCacheの拡張機能である。Javaファイルとして作り、コンパイルすることで独自の機能を付加することが可能である。
 

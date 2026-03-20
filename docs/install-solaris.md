@@ -1,7 +1,4 @@
 # NicoCache_nl のインストール(Solaris)
-<div style="text-align: right;">最終更新日：2026/03/17</div>
----
-
 !!! note "対象バージョン"
     **Oracle Solaris 11.4** を対象としています。  
     パッケージ管理は IPS (`pkg`) をシステム系に、サードパーティパッケージは **OpenCSW** (`pkgutil`) を使用します。  
