@@ -107,3 +107,54 @@ Remove-Item -Path $nestedDir -Recurse -Force
 
 - [https://nicocache.jpn.org/second/](https://nicocache.jpn.org/second/)
 - [https://nicocache.jpn.org/hofu/](https://nicocache.jpn.org/hofu/)
+
+
+## フィルターまとめ
+
+- 無制限の視聴履歴  
+- 無制限のマイリスト機能  
+- 強力なコメントフィルター  
+- 動画プレイヤー拡張  
+- ローカルプレーヤー・キャッシュ済みデータの再生  
+- マルチリンクビデオコントローラー  
+- 背景画像設定  
+- コメントヒートマップ など
+
+- [https://github.com/roflsunriz/filter-matome/releases](https://github.com/roflsunriz/filter-matome/releases)
+
+```powershell
+# GitHubリリースの最新アセット（zip/7z/exe等）を取得し、自動でダウンロードフォルダにダウンロード&展開
+
+# 例: リリース対象のGitHubリポジトリURL (必要に応じて変更)
+$repoOwner = "roflsunriz"
+$repoName = "filter-matome"
+$apiUrl = "https://api.github.com/repos/$repoOwner/$repoName/releases/latest"
+
+# ユーザーのダウンロードフォルダを取得
+$downloadDir = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
+
+# 最新リリース情報を取得
+$release = Invoke-WebRequest -Uri $apiUrl -UseBasicParsing | ConvertFrom-Json
+
+# 一番最初のアセット（.7z または .zip。見つからない場合は 1 番目のアセット）のURLを取得
+$asset = $release.assets | Where-Object { $_.name -match "\.(7z|zip)$" } | Select-Object -First 1
+if (-not $asset) { $asset = $release.assets | Select-Object -First 1 }
+
+$downloadUrl = $asset.browser_download_url
+$fileName = $asset.name
+$destPath = Join-Path $downloadDir $fileName
+
+Write-Output "最新リリースファイル [$fileName] をダウンロードしています..."
+
+Invoke-WebRequest -Uri $downloadUrl -OutFile $destPath
+
+# 7-Zipで展開（7z.exeへのパスが通っている前提）
+Write-Output "7-Zipで展開中..."
+& 7z x $destPath "-o$downloadDir" -y
+
+Write-Output "完了: $fileName が $downloadDir に展開されました。"
+```
+# 補足
+# - 7zipがインストールされていて、コマンドライン(7z.exe)がパスに通っている必要があります。
+# - 必要に応じて $repoOwner と $repoName を書き換えてください。
+
