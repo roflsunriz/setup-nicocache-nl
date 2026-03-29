@@ -8,7 +8,7 @@ function Invoke-Step04 {
     $stepName  = 'NicoCache_nl 本体のインストール'
     $ncVersion = '2026-01-15'
     $ncFile    = "NicoCache_nl-$ncVersion.7z"
-    $ncUrl     = 'https://nicocache.jpn.org/download.php?id=19&key=514e8a406c60c969adc4ff934d5e65427cdc09c74cab334e543f7c96f80b4d81'
+    $ncUrl     = 'https://nicocache.jpn.org/api/files/19/download'
     $ncDir     = 'C:\NicoCache_nl'
 
     Write-StepHeader "ステップ 4: $stepName"

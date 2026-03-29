@@ -55,7 +55,7 @@ echo 'export PATH="$ANT_HOME/bin:/opt/csw/bin:$PATH"' >> ~/.profile
 ```bash
 # バージョンを指定 (YYYY-MM-DD形式)
 NC_VERSION="2026-01-15"
-TARGET_URL="https://nicocache.jpn.org/download.php?id=19&key=514e8a406c60c969adc4ff934d5e65427cdc09c74cab334e543f7c96f80b4d81"
+TARGET_URL="https://nicocache.jpn.org/api/files/19/download"
 
 cd "$NICOCACHE_HOME"
 /opt/csw/bin/wget -O "NicoCache_nl-${NC_VERSION}.7z" "$TARGET_URL"

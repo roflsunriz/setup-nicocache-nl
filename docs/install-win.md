@@ -49,7 +49,7 @@ Move-Item -Path "$env:TEMP\apache-ant-$($antVersion)" -Destination $antDir
 ```powershell
 # バージョンを指定 (YYYY-MM-DD形式)
 $ncVersion = "2026-01-15"
-$targetURL = "https://nicocache.jpn.org/download.php?id=19&key=514e8a406c60c969adc4ff934d5e65427cdc09c74cab334e543f7c96f80b4d81"
+$targetURL = "https://nicocache.jpn.org/api/files/19/download"
 
 Set-Location $env:NICOCACHE_HOME
 Invoke-WebRequest -Uri $targetURL -OutFile "NicoCache_nl-$($ncVersion).7z"
