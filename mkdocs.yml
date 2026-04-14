@@ -68,7 +68,9 @@ nav:
     - 通常インストール(Mac): install-mac.md
     - 通常インストール(Solaris): install-solaris.md
     - 簡単インストーラー(Win): fast-installer-win.md
-  - アップデート: update.md
+  - アップデート: 
+    - NicoCache_nl: update.md
+    - 依存関係ソフトウェア: update-dependencies.md
   - nlFilters:
     - 概要: nl-filters.md
     - 構文リファレンス: nl-filters-syntax.md

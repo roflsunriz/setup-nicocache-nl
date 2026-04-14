@@ -1,6 +1,18 @@
 # NicoCache のアップデート方法
-1. [避難所](https://nicocache.jpn.org/)から本体をダウンロードして上書き更新する
-2. 以上
+
+管理者権限でターミナルを起動する。(Windows + R -> 「wt」または「wt.exe」と入力 -> Ctrl + Shift + Enter -> UAC 「はい」)  
+1. NicoCacheを停止する  
+```powershell
+Stop-Process -Name javaw -Force
+Stop-Process -Name java -Force
+```
+2. [避難所](https://nicocache.jpn.org/)から本体をダウンロードして上書き更新する  
+3. NicoCacheを再起動する  
+```powershell
+Set-Location $env:NICOCACHE_HOME
+Start-Process pwsh -ArgumentList "-WindowStyle Hidden -File `"$env:NICOCACHE_HOME\RunNicoCache.ps1`""
+```
+4. 以上  
 
 ??? example "`NicoCache_nl.jar` がビルドされずにソース差分だけが配布された場合"
     `ant` コマンドが使える場合：
