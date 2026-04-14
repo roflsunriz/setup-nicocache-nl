@@ -47,7 +47,7 @@ winget upgrade Gyan.FFmpeg --source winget
 
 ```powershell
 # バージョンを指定
-$bcVersion = "1.83"
+$bcVersion = "1.84"
 $jdkVersion = "18"
 
 Set-Location "C:\NicoCache_nl\lib"
@@ -62,7 +62,7 @@ Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-j
 
 ```powershell
 # バージョンを指定
-$antVersion = "1.10.15"
+$antVersion = "1.10.17"
 
 Set-Location $env:TEMP
 Invoke-WebRequest -Uri "https://dlcdn.apache.org//ant/binaries/apache-ant-$($antVersion)-bin.zip" -OutFile "apache-ant-$($antVersion)-bin.zip"
