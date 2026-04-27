@@ -50,7 +50,7 @@ fi
 
 ```bash
 # バージョンを指定
-BC_VERSION="1.83"
+BC_VERSION="1.84"
 JDK_VERSION="18"
 
 cd "$NICOCACHE_HOME/lib"

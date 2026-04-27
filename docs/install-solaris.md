@@ -33,7 +33,7 @@ echo "export NICOCACHE_HOME=\"$NC_DIR\"" >> ~/.profile
 5. Apache Ant をダウンロードし展開して `~/ant` に配置する  
 ```bash
 # バージョンを指定
-ANT_VERSION="1.10.15"
+ANT_VERSION="1.10.17"
 ANT_DIR="$HOME/ant"
 
 cd /tmp
@@ -78,7 +78,7 @@ fi
 
 ```bash
 # バージョンを指定
-BC_VERSION="1.83"
+BC_VERSION="1.84"
 JDK_VERSION="18"
 
 cd "$NICOCACHE_HOME/lib"

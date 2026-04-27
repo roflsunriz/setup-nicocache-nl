@@ -31,7 +31,7 @@ winget install 7zip.7zip --source winget
 12. Apache Antをダウンロードし、展開し、Cドライブ直下に`ant`ディレクトリを移動  
 ```powershell
 # バージョンを指定
-$antVersion = "1.10.15"
+$antVersion = "1.10.17"
 $antDir = "C:\ant"
 
 Set-Location $env:TEMP
@@ -71,7 +71,7 @@ if (Test-Path $nestedDir) {
 
 ```powershell
 # バージョンを指定
-$bcVersion = "1.83"
+$bcVersion = "1.84"
 $jdkVersion = "18"
 
 Set-Location "$env:NICOCACHE_HOME\lib"
