@@ -1,90 +1,83 @@
-# NicoCache_nl セットアップガイド
+# NicoCache_nl Usage Guide
 
-NicoCache_nl の公式セットアップガイドです。
+NicoCache_nl のインストール、設定、トラブルシューティングをまとめた日本語ドキュメントです。
 
-**公開 URL:** https://roflsunriz.github.io/setup-nicocache-nl/
+- 公開サイト: https://roflsunriz.github.io/setup-nicocache-nl/
+- リポジトリ: https://github.com/roflsunriz/setup-nicocache-nl
 
----
-
-## 概要
-
-[NicoCache_nl](https://nicocache.jpn.org/) はニコニコ動画の動画・サムネイルをローカルにキャッシュするプロキシサーバーソフトウェアです。このリポジトリは NicoCache_nl のインストール・設定・トラブルシューティングを日本語でまとめたドキュメントです。
-
-## ドキュメント構成
+## このリポジトリで読める内容
 
 | ページ | 内容 |
 |---|---|
 | [ホーム](docs/index.md) | NicoCache_nl の概要 |
-| [ダウンロード](docs/download.md) | ダウンロード方法 |
-| [通常インストール](docs/install.md) | 手順を一つ一つ追ったインストール方法 |
-| [簡単インストーラー](docs/fast-installer.md) | 高速インストーラーを使ったセットアップ |
-| [アップデート](docs/update.md) | 本体のアップデート手順 |
+| [ダウンロード](docs/download.md) | 本体や関連ソフトの入手先 |
+| [通常インストール(Win)](docs/install-win.md) | Windows 向けの通常インストール手順 |
+| [通常インストール(Linux)](docs/install-linux.md) | Linux 向けの通常インストール手順 |
+| [通常インストール(Mac)](docs/install-mac.md) | macOS 向けの通常インストール手順 |
+| [通常インストール(Solaris)](docs/install-solaris.md) | Solaris 向けの通常インストール手順 |
+| [簡単インストーラー(Win)](docs/fast-installer-win.md) | PowerShell スクリプトを使った Windows セットアップ |
+| [アップデート](docs/update.md) | NicoCache_nl 本体の更新手順 |
+| [依存関係ソフトウェアの更新](docs/update-dependencies.md) | Java / FFmpeg / 7-Zip などの更新手順 |
 | [nlFilters 概要](docs/nl-filters.md) | ページ書き換え機能の概要 |
 | [nlFilters 構文リファレンス](docs/nl-filters-syntax.md) | nlFilters の構文詳細 |
 | [正規表現](docs/regex.md) | nlFilters で使う正規表現の解説 |
 | [拡張機能](docs/extensions.md) | extensions の使い方 |
-| [トラブルシューティング](docs/trouble-shooting.md) | 問題の診断と解決手順 |
-| [サポートサイト](docs/support-site.md) | 公式サイト・スレッドへのリンク |
+| [トラブルシューティング](docs/trouble-shooting.md) | 問題の切り分けと対処手順 |
+| [サポートサイト](docs/support-site.md) | 関連サイト、掲示板、参考リンク |
+
+## 使い始める
+
+1. まず [ダウンロード](docs/download.md) で必要なファイルを確認する
+2. 利用環境に応じて [通常インストール](docs/install-win.md) または [簡単インストーラー(Win)](docs/fast-installer-win.md) を選ぶ
+3. 必要に応じて [アップデート](docs/update.md) と [依存関係ソフトウェアの更新](docs/update-dependencies.md) を参照する
+4. 動作確認や問題解決は [トラブルシューティング](docs/trouble-shooting.md) を参照する
 
 ## PowerShell インストールスクリプト
 
-NicoCache_nl のセットアップを自動化する PowerShell スクリプトを `scripts/` ディレクトリに収録しています。
+Windows では `scripts/` にある PowerShell スクリプトでセットアップを自動化できます。
 
-### 事前準備（初回のみ）
+- [簡単インストーラー(Win)](docs/fast-installer-win.md)
+- [通常インストール(Win)](docs/install-win.md)
 
-PowerShell 7 のインストールとスクリプト実行ポリシーの変更をまとめて行います。  
-**Windows PowerShell（powershell.exe）から実行できます。PowerShell 7 は不要です。**
+### 事前準備
+
+PowerShell 7 の導入と実行ポリシーの設定が必要な場合があります。
 
 ```powershell
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Enable-ScriptExecution.ps1" -OutFile "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
 ```
 
-完了後はターミナルを閉じて、「Windowsキー + R」→ `pwsh` で PowerShell 7 を起動してください。
-
-### ダウンロードして実行
+### スクリプトをダウンロードして実行
 
 ```powershell
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" -OutFile "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
 pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
 ```
 
-### ネットワーク経由で直接実行（PowerShell 7 が必要）
+### ネットワーク経由で直接実行
 
-> [!NOTE]
-> PowerShell 7 未インストールの場合・実行ポリシーが未設定の場合は、先に[事前準備（初回のみ）](#事前準備初回のみ)を行ってください。
+PowerShell 7 (`pwsh`) が必要です。
 
 ```powershell
 iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1') }"
 ```
 
-### DryRun で事前確認
-
-実際の変更を行わずに実行内容を確認できます：
-
-```powershell
-pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1" -DryRun
-```
-
-詳しい使い方は [PowerShell インストールスクリプト](docs/fast-installer.md) を参照してください。
-
----
-
 ## ローカルでプレビューする
 
-Python 3.12 以上が必要です。
+MkDocs でローカル確認できます。
 
 ```bash
 pip install -r requirements.txt
-mkdocs serve
+mkdocs serve --livereload --dirty
 ```
 
-ブラウザで http://127.0.0.1:8000 を開くと確認できます。
+ブラウザで `http://127.0.0.1:8000` を開くと確認できます。
 
 ## デプロイ
 
-`main` ブランチに push すると GitHub Actions が自動的に MkDocs Material でビルドし、GitHub Pages へデプロイします。
+`main` ブランチに push すると GitHub Actions が MkDocs Material でビルドし、GitHub Pages へデプロイします。
 
 ## ライセンス
 
-このリポジトリは [MIT License](LICENSE) に基づき公開しています。
+このリポジトリは [MIT License](LICENSE) に基づいて公開しています。
