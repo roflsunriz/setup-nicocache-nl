@@ -16,6 +16,7 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 | [通常インストール(Mac)](docs/install-mac.md) | macOS 向けの通常インストール手順 |
 | [通常インストール(Solaris)](docs/install-solaris.md) | Solaris 向けの通常インストール手順 |
 | [簡単インストーラー(Win)](docs/fast-installer-win.md) | PowerShell スクリプトを使った Windows セットアップ |
+| [Windows Terminal](docs/windows-terminal.md) | Windows Terminalの開き方 |
 | [アップデート](docs/update.md) | NicoCache_nl 本体の更新手順 |
 | [依存関係ソフトウェアの更新](docs/update-dependencies.md) | Java / FFmpeg / 7-Zip などの更新手順 |
 | [nlFilters 概要](docs/nl-filters.md) | ページ書き換え機能の概要 |

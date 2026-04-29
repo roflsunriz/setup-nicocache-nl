@@ -17,7 +17,20 @@
 
 スクリプトを使わずに手動でセットアップする場合や、特定のコンポーネントだけを更新する場合に参照。
 
-## Eclipse Temurin OpenJDK
+!!! info
+    `winget install`は初回インストールコマンド。`winget upgrade`はインストール済みのソフトウェアがある状態での最新版へのアップデートコマンド。
+
+### まとめてアップデート
+
+管理者権限でターミナルを起動した状態で、  
+
+```powershell
+winget upgrade --all
+```
+
+wingetに情報があるソフトウェアがすべてアップデートされる。  
+
+### Eclipse Temurin OpenJDK
 
 [Eclipse Temurin OpenJDK (JDK17 LTS)](https://adoptium.net/temurin/releases/?os=windows&arch=x64&package=jdk&version=17)
 
@@ -30,7 +43,7 @@ $jdkVersion = "17"
 winget upgrade EclipseAdoptium.Temurin.$($jdkVersion).JDK --source winget
 ```
 
-## FFmpeg
+### FFmpeg
 
 [FFmpeg](https://www.gyan.dev/ffmpeg/builds/)
 
@@ -41,7 +54,7 @@ winget install Gyan.FFmpeg --source winget
 winget upgrade Gyan.FFmpeg --source winget
 ```
 
-## BouncyCastle
+### BouncyCastle
 
 [BouncyCastle](https://www.bouncycastle.org/download/bouncy-castle-java/#latest)
 
@@ -56,7 +69,7 @@ Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcutil-j
 Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk$($jdkVersion)on/$($bcVersion)/bcpkix-jdk$($jdkVersion)on-$($bcVersion).jar" -OutFile "bcpkix.jar"
 ```
 
-## Apache Ant
+### Apache Ant
 
 [Apache Ant](https://ant.apache.org/bindownload.cgi)
 
@@ -70,7 +83,7 @@ Invoke-WebRequest -Uri "https://dlcdn.apache.org//ant/binaries/apache-ant-$($ant
 Move-Item -Path "$env:TEMP\apache-ant-$($antVersion)" -Destination "C:\ant"
 ```
 
-## 7-zip
+### 7-zip
 
 [7-zip](https://7-zip.opensource.jp/)
 
@@ -81,7 +94,7 @@ winget install 7zip.7zip --source winget
 winget upgrade 7zip.7zip --source winget
 ```
 
-## メインアップローダ
+### メインアップローダ
 
 [https://nicocache.jpn.org/](https://nicocache.jpn.org/)
 
@@ -103,13 +116,13 @@ Remove-Item -Path $nestedDir -Recurse -Force
 }
 ```
 
-## 旧アップローダのミラー
+### 旧アップローダのミラー
 
 - [https://nicocache.jpn.org/second/](https://nicocache.jpn.org/second/)
 - [https://nicocache.jpn.org/hofu/](https://nicocache.jpn.org/hofu/)
 
 
-## フィルターまとめ
+### フィルターまとめ
 
 - 無制限の視聴履歴  
 - 無制限のマイリスト機能  
