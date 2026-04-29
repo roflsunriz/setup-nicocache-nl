@@ -22,7 +22,7 @@
 
 ### まとめてアップデート
 
-管理者権限でターミナルを起動した状態で、  
+[管理者権限でターミナルを起動](./windows-terminal.md)した状態で、  
 
 ```powershell
 winget upgrade --all
