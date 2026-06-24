@@ -100,8 +100,8 @@ winget upgrade 7zip.7zip --source winget
 
 ```powershell
 # バージョンを指定 (YYYY-MM-DD形式)
-$ncVersion = "2026-01-15"
-$targetURL = "https://nicocache.jpn.org/api/files/19/download"
+$ncVersion = "2026-06-13"
+$targetURL = "https://nicocache.jpn.org/api/files/21/download"
 $ncDir = "C:\NicoCache_nl"
 
 Set-Location $ncDir

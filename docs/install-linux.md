@@ -46,8 +46,8 @@ source ~/.bashrc
 6. `NicoCache_nl-2026-01-15.7z` を避難所アップローダからダウンロードして展開  
 ```bash
 # バージョンを指定 (YYYY-MM-DD形式)
-NC_VERSION="2026-01-15"
-TARGET_URL="https://nicocache.jpn.org/api/files/19/download"
+NC_VERSION="2026-06-13"
+TARGET_URL="https://nicocache.jpn.org/api/files/21/download"
 
 cd "$NICOCACHE_HOME"
 wget -O "NicoCache_nl-${NC_VERSION}.7z" "$TARGET_URL"
