@@ -32,4 +32,4 @@ Get-Content .\NicoCache_nl-<version>.msi.sha256
 - 標準外のフィルターまとめ: [roflsunriz/filter-matome Releases](https://github.com/roflsunriz/filter-matome/releases)
 - 本体の更新内容: [NicoCache_nl CHANGELOG](https://github.com/roflsunriz/NicoCache_nl/blob/main/CHANGELOG.md)
 
-フィルターは本体の標準機能ではないものを含みます。導入前に対象バージョン、内容、配布元を確認し、利用者データ側の `nlFilters/` に追加してください。
+フィルターは本体の標準機能ではないものを含みます。導入前に対象バージョン、内容、配布元を確認し、利用者データ側の対応フォルダに追加してください。
