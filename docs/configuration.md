@@ -1,15 +1,15 @@
 # 設定とデータ管理
 
-NicoCache_nl の設定は `config.properties` に保存します。既定値の一覧は `defaults/00_NicoCache.properties`、`defaults/10_NicoCache_nl.properties`、`defaults/25_NicoCache_nl_NEW.properties`、TLS 関連は `defaults/30_NicoCache_nl_TLS.properties` にあります。既定ファイルは更新で置き換わるため、直接編集しないでください。
+NicoCache_nl の設定は `config.properties` に保存する。既定値の一覧は `defaults/00_NicoCache.properties`、`defaults/10_NicoCache_nl.properties`、`defaults/25_NicoCache_nl_NEW.properties`、TLS 関連は `defaults/30_NicoCache_nl_TLS.properties` にある。既定ファイルは更新で置き換わるため、直接編集しないこと。
 
 ## 変更方法
 
-1. NicoCache_nl を終了する
-2. `config.properties` をバックアップする
-3. 変更したいキーだけを記述または変更する
-4. 再起動し、`http://127.0.0.1:8080/` と動画再生で確認する
+1. NicoCache_nl を終了する。
+2. `config.properties` をバックアップする。
+3. 変更したいキーだけを記述または変更する。
+4. 再起動し、`http://127.0.0.1:8080/` と動画再生で確認する。
 
-`#` から始まる行はコメントです。設定ファイル先頭の文字コード判定用の行は削除しないでください。
+`#` から始まる行はコメントである。設定ファイル先頭の文字コード判定用の行は削除しないこと。
 
 ## よく使う設定
 
