@@ -1,159 +1,57 @@
-# NicoCache_nl のインストール(Linux)
-!!! note "対象ディストリビューション"
-    このガイドは **Debian/Ubuntu 系** (apt) を主対象としています。  
-    Fedora/RHEL 系は `apt` を `dnf` に、パッケージ名を適宜読み替えてください。
+# 手動インストール（Linux・macOS・Solaris）
 
-1. ターミナルを開く（`Ctrl + Alt + T` など）  
-2. Eclipse Temurin OpenJDK 17・FFmpeg・p7zip をインストールする  
-```bash
-sudo apt update
-sudo apt install -y wget apt-transport-https gnupg curl
+Windows 以外では、配布アーカイブを展開して Java から起動します。OS のパッケージ名や証明書ストアの操作はディストリビューションごとに異なるため、ここでは NicoCache_nl 側の共通手順を示します。
 
-# Eclipse Temurin リポジトリを追加
-wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public \
-  | sudo gpg --dearmor -o /etc/apt/keyrings/adoptium.gpg
-echo "deb [signed-by=/etc/apt/keyrings/adoptium.gpg] \
-  https://packages.adoptium.net/artifactory/deb \
-  $(awk -F= '/^VERSION_CODENAME/{print $2}' /etc/os-release) main" \
-  | sudo tee /etc/apt/sources.list.d/adoptium.list
-sudo apt update
-sudo apt install -y temurin-17-jdk ffmpeg p7zip-full
-```
-3. ホームディレクトリに `NicoCache_nl` ディレクトリを作成し、環境変数 `NICOCACHE_HOME` を設定する  
-```bash
-NC_DIR="$HOME/NicoCache_nl"
-mkdir -p "$NC_DIR"
-echo "export NICOCACHE_HOME=\"$NC_DIR\"" >> ~/.bashrc
-source ~/.bashrc
-```
-4. Apache Ant をダウンロードし展開して `~/ant` に配置する  
-```bash
-# バージョンを指定
-ANT_VERSION="1.10.17"
-ANT_DIR="$HOME/ant"
+## 1. 配布物を検証して展開する
 
-cd /tmp
-wget "https://dlcdn.apache.org//ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz"
-tar -xzf "apache-ant-${ANT_VERSION}-bin.tar.gz"
-mv "apache-ant-${ANT_VERSION}" "$ANT_DIR"
-```
-5. 環境変数 `ANT_HOME` と `PATH` に Ant を登録する  
-```bash
-echo "export ANT_HOME=\"$HOME/ant\"" >> ~/.bashrc
-echo 'export PATH="$ANT_HOME/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-```
-6. `NicoCache_nl-2026-01-15.7z` を避難所アップローダからダウンロードして展開  
-```bash
-# バージョンを指定 (YYYY-MM-DD形式)
-NC_VERSION="2026-06-13"
-TARGET_URL="https://nicocache.jpn.org/api/files/21/download"
+[配布元](download.md)から本体を取得し、提供されている SHA-256 を確認してから、書き込み可能な専用フォルダーへ展開します。キャッシュと証明書を含むため、共有・一時フォルダーには置かないでください。
 
-cd "$NICOCACHE_HOME"
-wget -O "NicoCache_nl-${NC_VERSION}.7z" "$TARGET_URL"
-7z x "NicoCache_nl-${NC_VERSION}.7z" -o"$NICOCACHE_HOME" -y
-NESTED_DIR="$NICOCACHE_HOME/NicoCache_nl"
-if [ -d "$NESTED_DIR" ]; then
-    mv "$NESTED_DIR"/* "$NICOCACHE_HOME/"
-    rmdir "$NESTED_DIR"
-fi
-```
-7. BouncyCastle から依存ライブラリをダウンロードし、証明書を生成する  
+## 2. Java を確認する
 
-!!! warning
-    genCerts.sh の実行フェーズで Enter キー操作が必要な場合があります。
+手動起動には Java が必要です。現行本体では Java 17・21・25 の運用経路があり、対応する LTS を使用します。
 
-    誤ってターミナルを閉じないように注意！
+```sh
+java -version
+cd /path/to/NicoCache_nl
+java -jar NicoCache_nl.jar
+```
 
-!!! note
-    `genCerts.sh` が存在しない場合は `ant genCerts` コマンドで代替できます。
+Unix 系の同梱スクリプトを使う場合は、次でも起動できます。`NICOCACHE_JAVA` で Java 実行ファイル、`NICOCACHE_OPTS` で JVM オプションを指定できます。
 
-```bash
-# バージョンを指定
-BC_VERSION="1.84"
-JDK_VERSION="18"
+```sh
+chmod +x NicoCache_nl.sh
+./NicoCache_nl.sh
+```
 
-cd "$NICOCACHE_HOME/lib"
-wget "https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk${JDK_VERSION}on/${BC_VERSION}/bcprov-jdk${JDK_VERSION}on-${BC_VERSION}.jar" -O bcprov.jar
-wget "https://repo1.maven.org/maven2/org/bouncycastle/bcutil-jdk${JDK_VERSION}on/${BC_VERSION}/bcutil-jdk${JDK_VERSION}on-${BC_VERSION}.jar" -O bcutil.jar
-wget "https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk${JDK_VERSION}on/${BC_VERSION}/bcpkix-jdk${JDK_VERSION}on-${BC_VERSION}.jar" -O bcpkix.jar
-cd "$NICOCACHE_HOME"
-chmod +x genCerts.sh
-./genCerts.sh
-cp "$NICOCACHE_HOME/config.properties.default" "$NICOCACHE_HOME/config.properties"
-echo "enableMitM=true" >> "$NICOCACHE_HOME/config.properties"
-```
-8. 生成された CA 証明書をシステムの証明書ストアに追加する  
-```bash
-sudo cp "$NICOCACHE_HOME/certs/ca.cer" /usr/local/share/ca-certificates/nicocache-nl.crt
-sudo update-ca-certificates
-```
-9. Firefox を開く  
-10. 設定 > プライバシーとセキュリティ > 証明書 > 証明書を表示 > 認証局証明書 > インポート  
-![Firefoxの証明書インポート](./images/firefox-certs.png)
-11. `~/NicoCache_nl/certs/ca.cer` を選択  
-12. 「この認証局によるウェブサイトの識別を信頼する」にチェックを入れる  
-13. Firefox を再起動する  
-14. `proxy_sample.pac` から `proxy.pac` を作成  
-```bash
-cp "$NICOCACHE_HOME/proxy_sample.pac" "$NICOCACHE_HOME/proxy.pac"
-```
-15. システムのプロキシ設定で自動プロキシスクリプトを `http://localhost:8080/proxy.pac` に設定する  
-**GNOME (Ubuntu 等):**  
-```bash
-gsettings set org.gnome.system.proxy mode 'auto'
-gsettings set org.gnome.system.proxy autoconfig-url 'http://localhost:8080/proxy.pac'
-```
-**KDE Plasma:**  
-システム設定 → ネットワーク → プロキシ → 「自動プロキシ設定スクリプトの URL」に `http://localhost:8080/proxy.pac` を入力する。  
-16. その他、`config.properties` に変更したい設定があれば編集する。デフォルト設定は `defaults` ディレクトリに格納されている。  
-17. ランチャースクリプトを作成する  
-```bash
-cat > "$NICOCACHE_HOME/run-nicocache.sh" << EOF
-#!/bin/bash
-cd "$NICOCACHE_HOME"
-java -jar NicoCache_nl.jar &
-EOF
-chmod +x "$NICOCACHE_HOME/run-nicocache.sh"
-```
-18. `NicoCacheGUI.property` の設定を書き込む  
-```bash
-cat > "$NICOCACHE_HOME/NicoCacheGUI.property" << 'EOF'
-HideWindow=true
-LogWindowAlwaysOnTop=false
-EOF
-```
-19. systemd ユーザーサービスとして登録してログイン時に自動起動させる  
-```bash
-mkdir -p ~/.config/systemd/user
-cat > ~/.config/systemd/user/nicocache.service << EOF
-[Unit]
-Description=NicoCache_nl
-After=network.target
+既定ポートは `8080` です。`http://127.0.0.1:8080/` にアクセスし、バージョンが表示されることを確認します。
 
-[Service]
-Type=simple
-ExecStart=/bin/bash $NICOCACHE_HOME/run-nicocache.sh
-Restart=on-failure
+## 3. HTTPS MitM の設定 { #https-mitm-の設定 }
 
-[Install]
-WantedBy=default.target
-EOF
-systemctl --user daemon-reload
-systemctl --user enable nicocache.service
-systemctl --user start nicocache.service
-```
-20. NicoCache_nl が起動していることを確認する  
-```bash
-systemctl --user status nicocache.service
-```
-21. インストール完了。アンインストール時は以下を実行する  
-```bash
-systemctl --user stop nicocache.service
-systemctl --user disable nicocache.service
-rm -f ~/.config/systemd/user/nicocache.service
-systemctl --user daemon-reload
-rm -rf "$NICOCACHE_HOME"
-sudo rm -f /usr/local/share/ca-certificates/nicocache-nl.crt
-sudo update-ca-certificates
-```
+HTTPS のキャッシュやページ書き換えには、CA と対象サイト証明書が必要です。
+
+1. `certificate-targets.txt` の対象ドメインを確認する
+2. `./genCerts.sh` を実行する
+3. 生成された `certs/ca.cer` を、使用するブラウザーまたは OS の信頼済み認証局ストアへ登録する
+4. `config.properties` に `enableMitM=true` を設定する
+5. ブラウザーのプロキシー自動設定で `http://127.0.0.1:8080/proxy.pac` を指定する
+
+Firefox など独自の証明書ストアを使うブラウザーでは、OS への登録とは別に `ca.cer` のインポートが必要です。CA を作り直す必要がある場合だけ、`certs/` の `ca.`・`site.` で始まる生成ファイルを安全にバックアップしてから削除し、再生成後に証明書を登録し直します。秘密鍵や `certs/` の内容は公開しないでください。
+
+## 4. 設定と利用者データ
+
+`config.properties.default` は説明用のひな型です。変更したい設定だけを `config.properties` に記述します。`defaults/` を直接編集すると更新で失われます。
+
+主要な設定は次のとおりです。
+
+| 設定 | 既定・用途 |
+|---|---|
+| `listenPort` | 待受ポート。既定は `8080`。変更時はブラウザー側の PAC も合わせる。 |
+| `userDataRoot` | 利用者データの保存先。相対パスはアプリケーションフォルダー基準。 |
+| `cacheFolder` | 動画キャッシュの保存先。未指定時は `cache`。 |
+| `needFreeSpace` | 新規キャッシュを停止する空き容量の下限（MB）。既定は 100。 |
+| `cacheThumbnail` / `thcacheFolder` | サムネイルキャッシュと保存先。 |
+| `enableMitM` | HTTPS MitM を有効化する。CA 信頼・PAC と組み合わせる。 |
+
+## OS ごとの補足
+
+[macOS](install-mac.md) と [Solaris](install-solaris.md) は、この手動手順にそれぞれの証明書・自動起動方法を組み合わせます。

@@ -63,16 +63,17 @@ nav:
   - ホーム: index.md
   - ダウンロード: download.md
   - インストール:
-    - 通常インストール(Win): install-win.md
-    - 通常インストール(Linux): install-linux.md
-    - 通常インストール(Mac): install-mac.md
-    - 通常インストール(Solaris): install-solaris.md
-    - 簡単インストーラー(Win): fast-installer-win.md
+    - Windows（MSI/ZIP）: install-win.md
+    - Linux など（手動）: install-linux.md
+    - macOS（手動）: install-mac.md
+    - Solaris（手動）: install-solaris.md
+    - 旧 PowerShell インストーラー: fast-installer-win.md
   - ターミナル:
     - Windows Terminal: windows-terminal.md
   - アップデート: 
     - NicoCache_nl: update.md
     - 依存関係ソフトウェア: update-dependencies.md
+  - 設定とデータ管理: configuration.md
   - nlFilters:
     - 概要: nl-filters.md
     - 構文リファレンス: nl-filters-syntax.md

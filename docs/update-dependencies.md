@@ -1,35 +1,21 @@
-# 依存関係ソフトウェアのアップデート方法
+# 依存関係ソフトウェアの更新
 
-管理者権限でターミナルを起動して以下を実行。(Windows + R -> 「wt」または「wt.exe」と入力 -> Ctrl + Shift + Enter -> UAC 「はい」)  
+## Windows パッケージ利用者
 
-NicoCache_nl本体を停止してからアップデートを実行。   
+MSI/ZIP 版は専用 Java ランタイムと証明書生成に必要な依存ライブラリを同梱します。利用者が Java、Apache Ant、Bouncy Castle を個別に更新・置換する必要はありません。個別更新は起動不能や証明書生成失敗の原因になるため行わないでください。
+
+ブラウザーは、OS またはブラウザーの通常の更新機能で最新の安定版を利用してください。Firefox では証明書ストアの利用方式により CA 証明書の再登録が必要になることがあります。
+
+## JAR を直接利用する構成
+
+Java は本体が対応する LTS を使用します。現行の Windows パッケージは JDK 25 を含みますが、手動起動用の `RunNicoCache.ps1` は検出した Java 17・21・25 から選択できます。更新前に現在の Java を確認してください。
+
 ```powershell
-Stop-Process -Name javaw -Force
-Stop-Process -Name java -Force
+java -version
 ```
 
-## JDKのアップデート
-```powershell
-winget upgrade EclipseAdoptium.Temurin.17.JDK --source winget
-```
-```powershell
-winget upgrade EclipseAdoptium.Temurin.21.JDK --source winget
-```
+Bouncy Castle やビルドツールは開発・手動証明書生成向けです。配布元が指定する組み合わせとハッシュを確認し、稼働中の `lib/` を推測で置き換えないでください。
 
-## FFmpegのアップデート
-```powershell
-winget upgrade Gyan.FFmpeg --source winget
-```
+## FFmpeg
 
-## 7-zipのアップデート
-```powershell
-winget upgrade 7zip.7zip --source winget
-```
-
-## まとめてアップデート
-```powershell
-winget upgrade --all
-```
-
-## Bouncy CastleとApache Ant
-[ダウンロード](./download.md)のスクリプトを参考に、バージョン番号を最新のものに入れ替えて実行する。  
+FFmpeg は一部の変換・音声抽出に使われます。該当機能を利用する場合だけ、OS 向けの信頼できる配布元から導入・更新し、`ffmpeg -version` で起動を確認します。NicoCache_nl の通常のキャッシュ・再生だけに必須ではありません。

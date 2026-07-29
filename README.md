@@ -11,14 +11,15 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 |---|---|
 | [ホーム](docs/index.md) | NicoCache_nl の概要 |
 | [ダウンロード](docs/download.md) | 本体や関連ソフトの入手先 |
-| [通常インストール(Win)](docs/install-win.md) | Windows 向けの通常インストール手順 |
-| [通常インストール(Linux)](docs/install-linux.md) | Linux 向けの通常インストール手順 |
-| [通常インストール(Mac)](docs/install-mac.md) | macOS 向けの通常インストール手順 |
-| [通常インストール(Solaris)](docs/install-solaris.md) | Solaris 向けの通常インストール手順 |
-| [簡単インストーラー(Win)](docs/fast-installer-win.md) | PowerShell スクリプトを使った Windows セットアップ |
+| [インストール(Windows)](docs/install-win.md) | MSI/ZIP を使った推奨手順 |
+| [手動インストール(Linux)](docs/install-linux.md) | Linux など Unix 系の共通手順 |
+| [手動インストール(Mac)](docs/install-mac.md) | macOS 固有の補足 |
+| [手動インストール(Solaris)](docs/install-solaris.md) | Solaris 固有の補足 |
+| [旧 PowerShell インストーラー](docs/fast-installer-win.md) | 既存 JAR 構成向けの参考資料 |
 | [Windows Terminal](docs/windows-terminal.md) | Windows Terminalの開き方 |
 | [アップデート](docs/update.md) | NicoCache_nl 本体の更新手順 |
 | [依存関係ソフトウェアの更新](docs/update-dependencies.md) | Java / FFmpeg / 7-Zip などの更新手順 |
+| [設定とデータ管理](docs/configuration.md) | config.properties、利用者データ、キャッシュの管理 |
 | [nlFilters 概要](docs/nl-filters.md) | ページ書き換え機能の概要 |
 | [nlFilters 構文リファレンス](docs/nl-filters-syntax.md) | nlFilters の構文詳細 |
 | [正規表現](docs/regex.md) | nlFilters で使う正規表現の解説 |
@@ -29,40 +30,16 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 ## 使い始める
 
 1. まず [ダウンロード](docs/download.md) で必要なファイルを確認する
-2. 利用環境に応じて [通常インストール](docs/install-win.md) または [簡単インストーラー(Win)](docs/fast-installer-win.md) を選ぶ
+2. 新規の Windows 環境では [インストール(Windows)](docs/install-win.md) を選ぶ
 3. 必要に応じて [アップデート](docs/update.md) と [依存関係ソフトウェアの更新](docs/update-dependencies.md) を参照する
 4. 動作確認や問題解決は [トラブルシューティング](docs/trouble-shooting.md) を参照する
 
-## PowerShell インストールスクリプト
+## Windows のインストール
 
-Windows では `scripts/` にある PowerShell スクリプトでセットアップを自動化できます。
+新規導入には、専用 Java ランタイムを含む MSI/ZIP を使用します。初回起動時に、HTTPS 証明書、Windows 自動プロキシー、ログオン時起動、利用者データ保存先を選べます。
 
-- [簡単インストーラー(Win)](docs/fast-installer-win.md)
-- [通常インストール(Win)](docs/install-win.md)
-
-### 事前準備
-
-PowerShell 7 の導入と実行ポリシーの設定が必要な場合があります。
-
-```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Enable-ScriptExecution.ps1" -OutFile "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
-powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Downloads\Enable-ScriptExecution.ps1"
-```
-
-### スクリプトをダウンロードして実行
-
-```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1" -OutFile "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
-pwsh -File "$env:USERPROFILE\Downloads\Install-NicoCache.ps1"
-```
-
-### ネットワーク経由で直接実行
-
-PowerShell 7 (`pwsh`) が必要です。
-
-```powershell
-iex "& { $(iwr -useb 'https://raw.githubusercontent.com/roflsunriz/setup-nicocache-nl/main/scripts/Install-NicoCache.ps1') }"
-```
+- [Windows のインストール](docs/install-win.md)
+- [ダウンロード](docs/download.md)
 
 ## ローカルでプレビューする
 

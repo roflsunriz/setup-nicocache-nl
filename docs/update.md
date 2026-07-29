@@ -1,46 +1,23 @@
-# NicoCache のアップデート方法
+# NicoCache_nl のアップデート
 
-管理者権限でターミナルを起動する。(Windows + R -> 「wt」または「wt.exe」と入力 -> Ctrl + Shift + Enter -> UAC 「はい」)  
-1. NicoCacheを停止する  
-```powershell
-Stop-Process -Name javaw -Force
-Stop-Process -Name java -Force
-```
-2. [避難所](https://nicocache.jpn.org/)から本体をダウンロードして上書き更新する  
-3. NicoCacheを再起動する  
-```powershell
-Set-Location $env:NICOCACHE_HOME
-Start-Process pwsh -ArgumentList "-WindowStyle Hidden -File `"$env:NICOCACHE_HOME\RunNicoCache.ps1`""
-```
-4. 以上  
+## Windows MSI 版
 
-??? example "`NicoCache_nl.jar` がビルドされずにソース差分だけが配布された場合"
-    `ant` コマンドが使える場合：
+1. 使用中の NicoCache_nl を GUI から終了します。
+2. [GitHub Release](download.md) から新しい MSI と SHA-256 を取得し、ハッシュを照合します。
+3. 新しい MSI を実行します。同じ製品として更新され、`config.properties` と利用者データは保持されます。
+4. 起動後、`http://127.0.0.1:8080/` でバージョンを確認し、動画再生とキャッシュ作成を確認します。
 
-    ```powershell
-    Set-Location "C:\NicoCache_nl"
-    ant version extract jar
-    ```
+更新中に CA 証明書、Windows 自動プロキシー、自動起動を取り消す必要はありません。これらはアンインストール時だけ、初回セットアップ前の状態へ戻します。
 
-    `javac` と `jar` で直接作る場合：
+## ZIP・手動配置版
 
-    `jar` 側では Ant の manifest を再現する必要があるため、先に次の内容を `C:\NicoCache_nl\manifest-nl.mf` として保存する。
+本体を上書きする前に、少なくとも次を別の場所へバックアップします。
 
-    ```text
-    Manifest-Version: 1.0
-    Main-Class: dareka.NLMain
-    Class-Path: sqlite-jdbc.jar igo.jar library.jar
-    Add-Opens: java.base/sun.net java.base/sun.net.www.protocol.http java.base/java.net java.base/java.lang java.base/java.lang.reflect
+- `config.properties`
+- `certs/`（秘密鍵を含むため安全な場所へ）
+- `cache/`、`thcache/`、`data/`
+- 自分で追加した `local/`、`nlFilters/`、Extension
 
-    ```
+新しい配布物を別フォルダーに展開してから、既定資材と追加資材を混在させないように移行してください。`defaults/` や標準 `local/`・nlFilter を旧版から上書きすると、現行の設定・TLS対象・ページ対応が古いまま残るおそれがあります。
 
-    そのうえで、例えば `build-javac.ps1` として次を保存して実行する。
-
-    ```powershell
-    Set-Location "C:\NicoCache_nl"
-    $sources = Get-ChildItem -Path ".\src\dareka" -Recurse -Filter "*.java" |
-        Where-Object { $_.Name -ne "package-info.java" } |
-        ForEach-Object { $_.FullName }
-    javac --release 11 -encoding UTF-8 -Xlint:-options -d ".\src" $sources
-    jar cfm "NicoCache_nl.jar" ".\manifest-nl.mf" -C ".\src" dareka -C ".\src" native
-    ```
+更新後に HTTPS キャッシュが動かない場合は、`config.properties` の古い `mitmHostPort` を残していないか、`defaults/30_NicoCache_nl_TLS.properties` が新しい配布物のものかを確認します。証明書の作り直しは、必要な場合だけ [TLS の手順](install-linux.md#https-mitm-の設定) に従ってください。

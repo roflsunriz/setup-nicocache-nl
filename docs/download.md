@@ -1,173 +1,35 @@
 # ダウンロード
-!!! warning "常に最新版を確認すること"
 
-    これらのパッケージは最新ではない可能性がある。 必ず[アップローダ](https://nicocache.jpn.org/)を確認すること。
+## 推奨: GitHub Release の Windows パッケージ
 
-    利用による損害等の補償はしない。 最新情報は [NicoCache 本スレ](https://ff2ch.syoboi.jp/?q=NicoCache) を参照。
+[NicoCache_nl の GitHub Release](https://github.com/roflsunriz/NicoCache_nl/releases) から、同じバージョンの配布物と SHA-256 ファイルを取得します。
 
-## PowerShell インストールスクリプト
+| ファイル | 用途 |
+|---|---|
+| `NicoCache_nl-<version>.msi` | 通常の Windows インストール。スタートメニュー・デスクトップの起動導線、更新、修復、アンインストールに対応。 |
+| `NicoCache_nl-<version>.zip` | 展開して利用する版。MSI と同じ自己完結アプリイメージを含む。 |
+| `*.sha256` | ダウンロードした MSI または ZIP の検証用。 |
 
-全手順を自動化するインストールスクリプト。  
+MSI/ZIP は専用 Java ランタイム、本体、証明書生成に必要なライブラリ、既定設定、標準 nlFilter を含みます。旧手順で必要だった Java、Ant、Bouncy Castle、7-Zip を個別に導入する必要はありません。
 
-詳しい使い方は [PowerShell インストールスクリプト(Windows)](fast-installer-win.md) を参照。  
-
----
-
-## 個別パッケージ（手動インストール用）
-
-スクリプトを使わずに手動でセットアップする場合や、特定のコンポーネントだけを更新する場合に参照。
-
-!!! info
-    `winget install`は初回インストールコマンド。`winget upgrade`はインストール済みのソフトウェアがある状態での最新版へのアップデートコマンド。
-
-### まとめてアップデート
-
-[管理者権限でターミナルを起動](./windows-terminal.md)した状態で、  
+PowerShell では次のようにハッシュを確認できます。
 
 ```powershell
-winget upgrade --all
+Get-FileHash .\NicoCache_nl-<version>.msi -Algorithm SHA256
+Get-Content .\NicoCache_nl-<version>.msi.sha256
 ```
 
-wingetに情報があるソフトウェアがすべてアップデートされる。  
+表示された SHA-256 が配布元の値と一致した場合だけインストールしてください。
 
-### Eclipse Temurin OpenJDK
+## 従来形式・開発者向けの配布物
 
-[Eclipse Temurin OpenJDK (JDK17 LTS)](https://adoptium.net/temurin/releases/?os=windows&arch=x64&package=jdk&version=17)
+避難所の [NicoCache関連ファイル置き場](https://nicocache.jpn.org/) には、従来形式のアーカイブ、フィルター、Extension などが置かれることがあります。ファイル名や番号を固定したダウンロード URL は、差し替え・移動で無効になるため、このガイドでは案内しません。配布内容、更新日、ハッシュを確認してから使用してください。
 
-```powershell
-$jdkVersion = "17"
-winget install EclipseAdoptium.Temurin.$($jdkVersion).JDK --source winget
-```
-```powershell
-$jdkVersion = "17"
-winget upgrade EclipseAdoptium.Temurin.$($jdkVersion).JDK --source winget
-```
+`NicoCache_nl.jar` を直接起動する構成では、対応する Java を用意し、TLS・設定・起動を手動で管理する必要があります。[手動インストール](install-linux.md) を参照してください。
 
-### FFmpeg
+## 関連配布物
 
-[FFmpeg](https://www.gyan.dev/ffmpeg/builds/)
+- 標準外のフィルターまとめ: [roflsunriz/filter-matome Releases](https://github.com/roflsunriz/filter-matome/releases)
+- 本体の更新内容: [NicoCache_nl CHANGELOG](https://github.com/roflsunriz/NicoCache_nl/blob/main/CHANGELOG.md)
 
-```powershell
-winget install Gyan.FFmpeg --source winget
-```
-```powershell
-winget upgrade Gyan.FFmpeg --source winget
-```
-
-### BouncyCastle
-
-[BouncyCastle](https://www.bouncycastle.org/download/bouncy-castle-java/#latest)
-
-```powershell
-# バージョンを指定
-$bcVersion = "1.84"
-$jdkVersion = "18"
-
-Set-Location "C:\NicoCache_nl\lib"
-Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk$($jdkVersion)on/$($bcVersion)/bcprov-jdk$($jdkVersion)on-$($bcVersion).jar" -OutFile "bcprov.jar"
-Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcutil-jdk$($jdkVersion)on/$($bcVersion)/bcutil-jdk$($jdkVersion)on-$($bcVersion).jar" -OutFile "bcutil.jar"
-Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk$($jdkVersion)on/$($bcVersion)/bcpkix-jdk$($jdkVersion)on-$($bcVersion).jar" -OutFile "bcpkix.jar"
-```
-
-### Apache Ant
-
-[Apache Ant](https://ant.apache.org/bindownload.cgi)
-
-```powershell
-# バージョンを指定
-$antVersion = "1.10.17"
-
-Set-Location $env:TEMP
-Invoke-WebRequest -Uri "https://dlcdn.apache.org//ant/binaries/apache-ant-$($antVersion)-bin.zip" -OutFile "apache-ant-$($antVersion)-bin.zip"
-7z x "apache-ant-$($antVersion)-bin.zip"
-Move-Item -Path "$env:TEMP\apache-ant-$($antVersion)" -Destination "C:\ant"
-```
-
-### 7-zip
-
-[7-zip](https://7-zip.opensource.jp/)
-
-```powershell
-winget install 7zip.7zip --source winget
-```
-```powershell
-winget upgrade 7zip.7zip --source winget
-```
-
-### メインアップローダ
-
-[https://nicocache.jpn.org/](https://nicocache.jpn.org/)
-
-```powershell
-# バージョンを指定 (YYYY-MM-DD形式)
-$ncVersion = "2026-06-13"
-$targetURL = "https://nicocache.jpn.org/api/files/21/download"
-$ncDir = "C:\NicoCache_nl"
-
-Set-Location $ncDir
-Invoke-WebRequest -Uri $targetURL -OutFile "$ncDir\NicoCache_nl-$($ncVersion).7z"
-7z x "$ncDir\NicoCache_nl-$($ncVersion).7z" "-o$ncDir" -y
-$nestedDir = "$ncDir\NicoCache_nl"
-if (Test-Path $nestedDir) {
-    
-Get-ChildItem -Path $nestedDir -Force | Move-Item -Destination $ncDir -Force
-    
-Remove-Item -Path $nestedDir -Recurse -Force
-}
-```
-
-### 旧アップローダのミラー
-
-- [https://nicocache.jpn.org/second/](https://nicocache.jpn.org/second/)
-- [https://nicocache.jpn.org/hofu/](https://nicocache.jpn.org/hofu/)
-
-
-### フィルターまとめ
-
-- 無制限の視聴履歴  
-- 無制限のマイリスト機能  
-- 強力なコメントフィルター  
-- 動画プレイヤー拡張  
-- ローカルプレーヤー・キャッシュ済みデータの再生  
-- マルチリンクビデオコントローラー  
-- 背景画像設定  
-- コメントヒートマップ など
-
-- [https://github.com/roflsunriz/filter-matome/releases](https://github.com/roflsunriz/filter-matome/releases)
-
-```powershell
-# GitHubリリースの最新アセット（7zファイル）を取得し、自動でダウンロードフォルダにダウンロード&展開
-
-# リリース対象のGitHubリポジトリURL
-$repoOwner = "roflsunriz"
-$repoName = "filter-matome"
-$apiUrl = "https://api.github.com/repos/$repoOwner/$repoName/releases/latest"
-
-# ユーザーのダウンロードフォルダを取得
-$downloadDir = [Environment]::GetFolderPath("UserProfile") + "\Downloads"
-
-# 最新リリース情報を取得
-$release = Invoke-WebRequest -Uri $apiUrl -UseBasicParsing | ConvertFrom-Json
-
-# 一番最初のアセット（.7z）のURLを取得
-$asset = $release.assets | Where-Object { $_.name -match "\.7z$" } | Select-Object -First 1
-if (-not $asset) { $asset = $release.assets | Select-Object -First 1 }
-
-$downloadUrl = $asset.browser_download_url
-$fileName = $asset.name
-$destPath = Join-Path $downloadDir $fileName
-
-Write-Output "最新リリースファイル [$fileName] をダウンロードしています..."
-
-Invoke-WebRequest -Uri $downloadUrl -OutFile $destPath
-
-# 7-Zipで展開
-Write-Output "7-Zipで展開中..."
-& 7z x $destPath "-o$downloadDir" -y
-
-Write-Output "完了: $fileName が $downloadDir に展開されました。"
-```
-
-補足
-
-- 7-zipがインストールされていて、コマンドライン(7z.exe)がパスに通っている必要がある。
+フィルターは本体の標準機能ではないものを含みます。導入前に対象バージョン、内容、配布元を確認し、利用者データ側の `nlFilters/` に追加してください。
