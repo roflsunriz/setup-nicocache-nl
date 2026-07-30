@@ -1,6 +1,6 @@
 # NicoCache_nl Usage Guide
 
-NicoCache_nl のインストール、設定、トラブルシューティングをまとめた日本語ドキュメントです。
+NicoCache_nl のインストール、設定、トラブルシューティングをまとめた日本語ドキュメントである。
 
 - 公開サイト: https://roflsunriz.github.io/setup-nicocache-nl/
 - リポジトリ: https://github.com/roflsunriz/setup-nicocache-nl
@@ -17,8 +17,8 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 | [手動インストール(Solaris)](docs/install-solaris.md) | Solaris 固有の補足 |
 | [旧 PowerShell インストーラー](docs/fast-installer-win.md) | 既存 JAR 構成向けの参考資料 |
 | [Windows Terminal](docs/windows-terminal.md) | Windows Terminalの開き方 |
-| [アップデート](docs/update.md) | NicoCache_nl 本体の更新手順 |
-| [依存関係ソフトウェアの更新](docs/update-dependencies.md) | Java / FFmpeg / 7-Zip などの更新手順 |
+| [アップデート](docs/update.md) | 独立アップデーターまたは手動による本体の更新手順 |
+| [依存関係ソフトウェアの更新](docs/update-dependencies.md) | 独立アップデーターによる Java / FFmpeg / 7-Zip などの更新手順 |
 | [設定とデータ管理](docs/configuration.md) | config.properties、利用者データ、キャッシュの管理 |
 | [nlFilters 概要](docs/nl-filters.md) | ページ書き換え機能の概要 |
 | [nlFilters 構文リファレンス](docs/nl-filters-syntax.md) | nlFilters の構文詳細 |
@@ -31,31 +31,31 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 
 1. まず [ダウンロード](docs/download.md) で必要なファイルを確認する
 2. 新規の Windows 環境では [インストール(Windows)](docs/install-win.md) を選ぶ
-3. 必要に応じて [アップデート](docs/update.md) と [依存関係ソフトウェアの更新](docs/update-dependencies.md) を参照する
+3. 導入後は [アップデート](docs/update.md) で独立アップデーターの入手方法と使い方を確認する
 4. 動作確認や問題解決は [トラブルシューティング](docs/trouble-shooting.md) を参照する
 
 ## Windows のインストール
 
-新規導入には、専用 Java ランタイムを含む MSI/ZIP を使用します。初回起動時に、HTTPS 証明書、Windows 自動プロキシー、ログオン時起動、利用者データ保存先を選べます。
+新規導入には、専用 Java ランタイムを含む MSI/ZIP を使用する。初回起動時に、HTTPS 証明書、Windows 自動プロキシー、ログオン時起動、利用者データ保存先を選べる。
 
 - [Windows のインストール](docs/install-win.md)
 - [ダウンロード](docs/download.md)
 
 ## ローカルでプレビューする
 
-MkDocs でローカル確認できます。
+MkDocs でローカル確認できる。
 
 ```bash
 pip install -r requirements.txt
 mkdocs serve --livereload --dirty
 ```
 
-ブラウザで `http://127.0.0.1:8000` を開くと確認できます。
+ブラウザーで `http://127.0.0.1:8000` を開くと確認できる。
 
 ## デプロイ
 
-`main` ブランチに push すると GitHub Actions が MkDocs Material でビルドし、GitHub Pages へデプロイします。
+`main` ブランチに push すると GitHub Actions が MkDocs Material でビルドし、GitHub Pages へデプロイする。
 
 ## ライセンス
 
-このリポジトリは [MIT License](LICENSE) に基づいて公開しています。
+このリポジトリは [MIT License](LICENSE) に基づいて公開している。

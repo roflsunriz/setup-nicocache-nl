@@ -8,6 +8,7 @@ NicoCache_nl は、ニコニコ動画向けのローカル HTTP/HTTPS プロキ�
 - `cache/` の動画、`thcache/` のサムネイル、コメント保存などを管理する
 - `/local/` で JavaScript・CSS・HTML などを配信し、`nlFilters` でニコニコ動画のページを置換する
 - Java Extension でプロキシーの処理、書き換え、完了通知などを拡張する
+- 独立アップデーターから NicoCache_nl 本体と管理対象の外部依存関係を確認・更新する
 
 HTTPS の通信内容を扱うには、初回セットアップで HTTPS と証明書の信頼を有効にする必要がある。証明書を信頼しない構成では、HTTPS のキャッシュ・書き換えは利用できない。
 
@@ -19,6 +20,8 @@ Windows では、GitHub Release の MSI または ZIP を使うことを推奨�
 2. [Windows のインストール](install-win.md) に従い、初回セットアップを完了する
 3. NicoCache_nl を起動し、`http://127.0.0.1:8080/` を開いてバージョンが表示されることを確認する
 4. ブラウザーで動画を再生し、利用者データフォルダーの `cache/` に保存されることを確認する
+
+導入後の本体と外部依存関係の管理には、専用 Java ランタイムを含む[独立アップデーター](update.md#standalone-updater)を使用できる。
 
 手動配置や Unix 系での起動は [各 OS の手順](install-linux.md) を参照すること。
 
