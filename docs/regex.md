@@ -7,6 +7,9 @@
 
 - [MDN 正規表現チートシート](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet)
 - [Rubular — 正規表現テスター](https://www.rubular.com/)
+- [regex101](https://regex101.com/)
+- [regexr](https://regexr.com/)
+- [RegexPlanet](https://www.regexplanet.com/advanced/browser/index.html)
 
 ---
 

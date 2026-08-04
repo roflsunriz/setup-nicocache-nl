@@ -3,13 +3,14 @@
 ## 独立アップデーターを使う方法（Windows、推奨） { #standalone-updater-dependencies }
 
 [独立アップデーター](download.md#standalone-updater-download)は、次の外部依存関係を一つの GUI から確認・更新できる。
-
-- Eclipse Temurin（NicoCache_nl で確認済みの Java 17・21・25 LTS。推奨・既定は Java 25）
-- FFmpeg
-- Bouncy Castle
-- Apache Ant
-- 7-Zip
-
+    
+- Eclipse Temurin（NicoCache_nl で確認済みの Java 17・21・25 LTS。推奨・既定は Java 25）    
+- FFmpeg    
+- Bouncy Castle    
+- Apache Ant    
+- 7-Zip    
+- GPAC/Mp4box    
+    
 1. NicoCache_nl を終了する。更新対象が使用中で置換できない場合、アップデーターは処理を失敗として既存内容を復元する。
 2. **NicoCache_nl Updater** を起動し、画面上部の更新対象フォルダーを確認する。誤っている場合は「変更…」から NicoCache_nl のインストール先を選ぶ。
 3. 「外部依存関係」タブを開き、Temurin LTS を選ぶ。通常は「25（推奨）」を使用する。
