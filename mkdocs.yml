@@ -64,9 +64,9 @@ nav:
   - ダウンロード: download.md
   - インストール:
     - Windows（MSI/ZIP）: install-win.md
-    - Linux など（手動）: install-linux.md
-    - macOS（手動）: install-mac.md
-    - Solaris（手動）: install-solaris.md
+    - Linux（DEB/RPM/ZIP）: install-linux.md
+    - macOS（PKG/DMG/ZIP）: install-mac.md
+    - Solaris（対象外）: install-solaris.md
     - 旧 PowerShell インストーラー: fast-installer-win.md
   - ターミナル:
     - Windows Terminal: windows-terminal.md

@@ -9,7 +9,8 @@ NicoCache_nl を起動し、ブラウザーで `http://127.0.0.1:8080/` を開�
 - GUI のログに起動失敗、ポート使用中、設定読み込み失敗がないか
 - `listenPort` を変更していないか。変更した場合は URL と PAC も同じポートか
 - 他のアプリケーションが 8080 を使用していないか
-- MSI/ZIP の導入先と利用者データの `config.properties` の `userDataRoot` が意図どおりか
+- アプリケーションルートの`config.properties`にある`userDataRoot`が意図した利用者データを
+  指しているか。ランチャーの「データルート診断」も確認する
 
 `http://127.0.0.1:8080/proxy.pac` も開き、PAC を取得できることを確認する。
 
@@ -17,13 +18,15 @@ NicoCache_nl を起動し、ブラウザーで `http://127.0.0.1:8080/` を開�
 
 HTTPS のページでキャッシュや書き換えが機能しない場合は、次を確認する。
 
-1. `config.properties` に `enableMitM=true` がある
+1. `config.properties`または既定値に`enableMitm=true`がある
 2. `certs/ca.cer` が生成されている
-3. Windows または使用ブラウザーが CA を信頼している
-4. ブラウザーの自動プロキシー設定が `http://127.0.0.1:8080/proxy.pac` を参照している
-5. Firefox が独自ストアを使う場合、Firefox 側にも CA をインポートしている
+3. `certs/site.jks`と`certs/site.targets`があり、ランチャーのデータルート診断が起動可能である
+4. OSまたは使用ブラウザーがCAを信頼している
+5. ブラウザーの自動プロキシー設定が`http://127.0.0.1:8080/proxy.pac`を参照している
+6. Firefoxが独自ストアを使う場合、Firefox側にもCAをインポートしている
 
-証明書警告を無視して継続しないこと。CA を作り直す場合は、現在の `certs/` を安全にバックアップし、[手動設定](install-linux.md#https-mitm-の設定)の手順に従う。
+証明書警告を無視して継続しないこと。CAやサイト証明書を推測で削除せず、先に`certs/`を安全に
+バックアップし、初回セットアップまたはデータルート診断の表示に従う。
 
 ## 3. NicoCache_nl を経由しない状態と比べる
 
@@ -51,16 +54,28 @@ HTTPS のページでキャッシュや書き換えが機能しない場合は�
 
 キャッシュの破損が疑われる場合も、まず対象動画だけを削除して再生を試す。全キャッシュを削除するのは最後の手段である。
 
-## 6. ログと問題報告
+## 6. 診断レポートを確認する
+
+本体の起動中は`NicoCacheDiagnostics`が管理APIと実プロキシー経路を監視する。応答停止や予期しない
+終了を検出すると、利用者データの`diagnostics/incidents/`へ匿名化済みHTMLを保存する。外部へ
+自動送信せず、本体を自動再起動しない。
+
+診断画面の「今すぐ収集」で任意の時点のレポートを作成できる。「レポートを開く」で保存先を
+確認し、動画ID・動画タイトルなど公開してよい情報だけかを自分でも確認する。
+
+## 7. ログと問題報告
 
 GUI の各ログタブには検索欄がある。必要に応じて正規表現や大文字小文字区別を使い、発生時刻前後のログを確認する。GUI の「デバッグログを debug.log に記録」を有効にすると、JAR と同じフォルダーの `debug.log` に記録する。ログは 1 MiB を上限に自動で切り詰められる。
 
-問題を報告するときは、秘密情報・ユーザー ID・Cookie・証明書・秘密鍵を含めないように確認し、次を添える。
+問題を報告するときは[Issue作成画面](https://github.com/roflsunriz/NicoCache_nl/issues/new/choose)の
+不具合報告フォームを使う。匿名化済み診断HTMLを添付できるが、Cookie、トークン、証明書秘密鍵、
+個人情報が含まれないことを確認する。使い方の質問は
+[Q&A Discussions](https://github.com/roflsunriz/NicoCache_nl/discussions/categories/q-a)を使う。
 
 ```
 OS と NicoCache_nl のバージョン:
 使用ブラウザーとバージョン:
-利用方法（MSI / ZIP / 手動 JAR）:
+利用方法（MSI / DEB / RPM / PKG / DMG / ZIP / 手動JAR）:
 HTTPS・自動プロキシーの設定:
 追加した nlFilter / Extension:
 再現手順:

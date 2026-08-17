@@ -1,57 +1,67 @@
-# 手動インストール（Linux・macOS・Solaris）
+# インストール（Linux）
 
-Windows 以外では、配布アーカイブを展開して Java から起動する。OS のパッケージ名や証明書ストアの操作はディストリビューションごとに異なるため、ここでは NicoCache_nl 側の共通手順を示す。
+## 1. パッケージを選ぶ
 
-## 1. 配布物を検証して展開する
+[ダウンロード](download.md)からCPUに合うLinux本体と`.sha256`を取得する。
 
-[配布元](download.md)から本体を取得し、提供されている SHA-256 を確認してから、書き込み可能な専用フォルダーへ展開する。キャッシュと証明書を含むため、共有・一時フォルダーには置かないこと。
+- Debian、Ubuntu系: `.deb`
+- Fedora、RHEL系: `.rpm`
+- その他または任意の場所へ置く場合: `.zip`
 
-## 2. Java を確認する
+DEB/RPMはアプリケーションを`/opt/nicocache-nl`へ配置し、`nicocache-nl`コマンドを登録する。
+ZIPは書き込み可能な専用フォルダーへ展開する。すべて専用Javaランタイムを含むため、通常は
+外部Javaを導入しない。
 
-手動起動には Java が必要である。現行本体では Java 17・21・25 の運用経路があり、対応する LTS を使用する。
-
-```sh
-java -version
-cd /path/to/NicoCache_nl
-java -jar NicoCache_nl.jar
-```
-
-Unix 系の同梱スクリプトを使う場合は、次でも起動できる。`NICOCACHE_JAVA` で Java 実行ファイル、`NICOCACHE_OPTS` で JVM オプションを指定できる。
+## 2. 導入して起動する
 
 ```sh
-chmod +x NicoCache_nl.sh
-./NicoCache_nl.sh
+# Debian、Ubuntu系
+sudo apt install ./NicoCache_nl-1.4.2-linux-x64.deb
+
+# Fedora、RHEL系
+sudo dnf install ./NicoCache_nl-1.4.2-linux-x64.rpm
+
+# パッケージ版の起動
+nicocache-nl
 ```
 
-既定ポートは `8080` である。`http://127.0.0.1:8080/` にアクセスし、バージョンが表示されることを確認する。
+ZIPでは展開先のランチャーを実行する。
 
-## 3. HTTPS MitM の設定 { #https-mitm-の設定 }
+```sh
+chmod +x NicoCache_nl NicoCacheDiagnostics
+./NicoCache_nl
+```
 
-HTTPS のキャッシュやページ書き換えには、CA と対象サイト証明書が必要である。
+`NicoCache_nl`は同梱`jre/bin/java`から`NicoCacheLauncher.jar`を起動する。本体はランチャーの
+「本体を起動」を押すまで起動しない。
 
-1. `certificate-targets.txt` の対象ドメインを確認する
-2. `./genCerts.sh` を実行する
-3. 生成された `certs/ca.cer` を、使用するブラウザーまたは OS の信頼済み認証局ストアへ登録する
-4. `config.properties` に `enableMitM=true` を設定する
-5. ブラウザーのプロキシー自動設定で `http://127.0.0.1:8080/proxy.pac` を指定する
+## 3. 初回セットアップ
 
-Firefox など独自の証明書ストアを使うブラウザーでは、OS への登録とは別に `ca.cer` のインポートが必要である。CA を作り直す必要がある場合だけ、`certs/` の `ca.`・`site.` で始まる生成ファイルを安全にバックアップしてから削除し、再生成後に証明書を登録し直す。秘密鍵や `certs/` の内容は公開しないこと。
+最初の通常起動では、次の4項目が推奨値として選択された初回セットアップを表示する。
 
-## 4. 設定と利用者データ
+1. 利用者データの保存先
+2. HTTPS MitMと証明書生成
+3. ローカルCAの信頼登録と`proxy.pac`
+4. XDG autostartによるログイン時起動
 
-`config.properties.default` は説明用のひな型である。変更したい設定だけを `config.properties` に記述する。`defaults/` を直接編集すると更新で失われる。
+Linuxの既定利用者データは、`XDG_DATA_HOME`があればその下の`NicoCache_nl`、なければ
+`~/.local/share/NicoCache_nl`である。CA登録には`trust`、自動プロキシーにはGNOMEの
+`gsettings`を使用する。利用できない機能や権限不足がある場合は失敗理由を表示し、その試行で
+行った変更をロールバックする。
 
-主要な設定は次のとおりである。
+Firefoxが独自の証明書ストアを使う場合は、利用者データの`certs/ca.cer`をFirefoxの認証局へ
+追加する。秘密鍵や`certs/`の内容は公開しないこと。
 
-| 設定 | 既定・用途 |
-|---|---|
-| `listenPort` | 待受ポート。既定は `8080`。変更時はブラウザー側の PAC も合わせる。 |
-| `userDataRoot` | 利用者データの保存先。相対パスはアプリケーションフォルダー基準。 |
-| `cacheFolder` | 動画キャッシュの保存先。未指定時は `cache`。 |
-| `needFreeSpace` | 新規キャッシュを停止する空き容量の下限（MB）。既定は 100。 |
-| `cacheThumbnail` / `thcacheFolder` | サムネイルキャッシュと保存先。 |
-| `enableMitM` | HTTPS MitM を有効化する。CA 信頼・PAC と組み合わせる。 |
+## 4. 動作確認
 
-## OS ごとの補足
+ランチャーから本体を起動し、次を確認する。
 
-[macOS](install-mac.md) と [Solaris](install-solaris.md) は、この手動手順にそれぞれの証明書・自動起動方法を組み合わせる。
+1. `http://127.0.0.1:8080/`に版が表示される
+2. `http://127.0.0.1:8080/proxy.pac`を取得できる
+3. ブラウザーで動画を再生すると利用者データの`cache/`へ保存される
+4. ランチャーの「本体を停止」で本体と診断アプリが終了する
+
+## 5. 手動JAR構成
+
+開発・互換検証でJARを直接起動する場合だけ、Java 17・21・25 LTSを用意する。通常利用では
+同梱ランタイムと`./NicoCache_nl`を使う。Solarisは配布・CI・アップデーターの対象外である。

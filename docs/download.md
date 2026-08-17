@@ -1,44 +1,76 @@
 # ダウンロード
 
-## 推奨: GitHub Release の Windows パッケージ
+## GitHub Releaseから入手する
 
-[NicoCache_nl の GitHub Release](https://github.com/roflsunriz/NicoCache_nl/releases) から、最新版の配布物と SHA-256 ファイルを取得する。
+[NicoCache_nl Releases](https://github.com/roflsunriz/NicoCache_nl/releases)から、OSと
+CPUアーキテクチャに合う本体、独立アップデーター、対応する`.sha256`を取得する。
 
-| ファイル | 用途 |
-|---|---|
-| `NicoCache_nl-<version>.msi` | 通常の Windows インストール。スタートメニュー・デスクトップの起動導線、更新、修復、アンインストールに対応。 |
-| `NicoCache_nl-<version>.zip` | 展開して利用する版。MSI と同じ自己完結アプリイメージを含む。 |
-| `NicoCache_nl-Updater-<updater-version>.msi` | 本体と外部依存関係を管理する独立アップデーター。専用 Java ランタイムを含む。 |
-| `*.sha256` | ダウンロードした MSI または ZIP の検証用。 |
+### NicoCache_nl本体
 
-MSI/ZIP は専用 Java ランタイム、本体、証明書生成に必要なライブラリ、既定設定、標準 nlFilter を含む。旧手順で必要だった Java、Ant、Bouncy Castle、7-Zip を個別に導入する必要はない。
+| OS | ファイル | 用途 |
+|---|---|---|
+| Windows | `NicoCache_nl-<version>.msi` | 通常の推奨。導入、更新、修復、アンインストールに対応する。 |
+| Windows | `NicoCache_nl-v<version>.zip` | MSIと同じアプリケーションルートを展開して使う。 |
+| Linux | `NicoCache_nl-<version>-linux-<arch>.deb` | Debian、Ubuntu系のパッケージ。 |
+| Linux | `NicoCache_nl-<version>-linux-<arch>.rpm` | Fedora、RHEL系のパッケージ。 |
+| Linux | `NicoCache_nl-<version>-linux-<arch>.zip` | 任意の場所へ展開するアプリイメージ。 |
+| macOS | `NicoCache_nl-<version>-macos-<arch>.pkg` | `/Applications/NicoCache_nl`へ導入するパッケージ。 |
+| macOS | `NicoCache_nl-<version>-macos-<arch>.dmg` | アプリケーションフォルダーを収録する。 |
+| macOS | `NicoCache_nl-<version>-macos-<arch>.zip` | 任意の場所へ展開するアプリイメージ。 |
 
-PowerShell では次のようにハッシュを確認できる。
+`<arch>`は`x64`や`arm64`である。現在公開されている資産のOS・CPUと使用中の環境が一致する
+ものだけを選ぶ。Solaris向けの配布と動作保証はない。
+
+すべての現行パッケージは専用Javaランタイム、本体JAR、ランチャー、診断アプリ、証明書生成、
+既定設定、標準nlFilterを含む。通常利用のためにJava、Ant、Bouncy Castle、PowerShell 7、
+7-Zipを先に導入する必要はない。
+
+## SHA-256を照合する
+
+配布ファイルと同名の`.sha256`を同じ場所へ保存する。PowerShellでは次のように照合できる。
 
 ```powershell
-Get-FileHash .\NicoCache_nl-<version>.msi -Algorithm SHA256
-Get-Content .\NicoCache_nl-<version>.msi.sha256
-Get-FileHash .\NicoCache_nl-Updater-<updater-version>.msi -Algorithm SHA256
-Get-Content .\NicoCache_nl-Updater-<updater-version>.msi.sha256
+$package = Get-Item .\NicoCache_nl-1.4.2.msi
+$expected = (Get-Content "$($package.FullName).sha256" -Raw).Split()[0]
+$actual = (Get-FileHash $package.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($actual -ne $expected) { throw 'SHA-256が一致しません' }
 ```
 
-表示された SHA-256 が配布元の値と一致した場合だけインストールすること。
+Linux/macOSでは次のように確認できる。
+
+```sh
+sha256sum -c NicoCache_nl-1.4.2-linux-x64.deb.sha256
+# macOSでsha256sumがない場合
+shasum -a 256 NicoCache_nl-1.4.2-macos-arm64.pkg
+cat NicoCache_nl-1.4.2-macos-arm64.pkg.sha256
+```
+
+表示された値が一致した場合だけ導入する。ファイル名と版は実際に取得した資産へ置き換える。
 
 ## 独立アップデーター { #standalone-updater-download }
 
-独立アップデーターは NicoCache_nl 本体と Temurin、FFmpeg、Bouncy Castle、Apache Ant、7-Zip、GPAC/Mp4box を一つの GUI から確認・更新する。アップデーターの版番号は本体のリリースタグとは独立しているため、ファイル名の版番号が本体と一致していなくても問題はない。
+独立アップデーターはNicoCache_nl本体とTemurin、FFmpeg、Bouncy Castle、Apache Ant、
+7-Zip、GPAC/MP4Boxを一つのGUIから確認・更新する。本体とは版番号が独立している。
 
-`NicoCache_nl-Updater-<updater-version>.msi` と対応する `.msi.sha256` を同じ GitHub Release から取得し、上記の手順で検証してからインストールする。スタートメニューまたはデスクトップの **NicoCache_nl Updater** から起動できる。専用 Java ランタイムを内包するため、本体側の Java ランタイムが破損していても起動できる。具体的な操作は[アップデート手順](update.md#standalone-updater)を参照すること。
+| OS | ファイル |
+|---|---|
+| Windows | `NicoCache_nl-Updater-<updater-version>.msi` |
+| Linux | `NicoCache_nl-Updater-<updater-version>-linux-<arch>.<deb|rpm|zip>` |
+| macOS | `NicoCache_nl-Updater-<updater-version>-macos-<arch>.<pkg|dmg|zip>` |
+
+専用Javaランタイムを内包するため、本体のJavaが破損していても起動できる。具体的な操作は
+[アップデート手順](update.md#standalone-updater)を参照すること。
 
 ## 従来形式・開発者向けの配布物
 
 避難所の [NicoCache関連ファイル置き場](https://nicocache.jpn.org/) には、従来形式のアーカイブ、フィルター、Extension などが置かれることがある。ファイル名や番号を固定したダウンロード URL は、差し替え・移動で無効になるため、このガイドでは案内しない。配布内容、更新日、ハッシュを確認してから使用すること。
 
-`NicoCache_nl.jar` を直接起動する構成では、対応する Java を用意し、TLS・設定・起動を手動で管理する必要がある。[手動インストール](install-linux.md) を参照すること。
+`NicoCache_nl.jar`を直接起動する構成では、対応するJava 17・21・25 LTSと、TLS、設定、
+起動管理を自分で用意する必要がある。通常利用ではOS別の自己完結パッケージを選ぶ。
 
 ## 関連配布物
 
-- mylist2やcomment-filter2などの追加機能: [roflsunriz/filter-matome Releases](https://github.com/roflsunriz/filter-matome/releases)
+- 追加フィルターなど: [roflsunriz/filter-matome Releases](https://github.com/roflsunriz/filter-matome/releases)
 - 本体の更新内容: [NicoCache_nl CHANGELOG](https://github.com/roflsunriz/NicoCache_nl/blob/main/CHANGELOG.md)
 
-導入前に追加機能の使い方とデータのバックアップ、対象バージョン、内容、配布元を確認し、利用者データ側の対応フォルダーに追加すること。
+追加資材はアプリケーションルートへ上書きせず、利用者データ側の対応フォルダーへ配置する。

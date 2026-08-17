@@ -12,9 +12,9 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 | [ホーム](docs/index.md) | NicoCache_nl の概要 |
 | [ダウンロード](docs/download.md) | 本体や関連ソフトの入手先 |
 | [インストール(Windows)](docs/install-win.md) | MSI/ZIP を使った推奨手順 |
-| [手動インストール(Linux)](docs/install-linux.md) | Linux など Unix 系の共通手順 |
-| [手動インストール(Mac)](docs/install-mac.md) | macOS 固有の補足 |
-| [手動インストール(Solaris)](docs/install-solaris.md) | Solaris 固有の補足 |
+| [インストール(Linux)](docs/install-linux.md) | DEB/RPM/ZIP を使った自己完結パッケージの導入手順 |
+| [インストール(macOS)](docs/install-mac.md) | PKG/DMG/ZIP を使った自己完結パッケージの導入手順 |
+| [Solaris](docs/install-solaris.md) | 現行の配布・検証対象外であることの案内 |
 | [旧 PowerShell インストーラー](docs/fast-installer-win.md) | 既存 JAR 構成向けの参考資料 |
 | [Windows Terminal](docs/windows-terminal.md) | Windows Terminalの開き方 |
 | [アップデート](docs/update.md) | 独立アップデーターまたは手動による本体の更新手順 |
@@ -30,15 +30,19 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 ## 使い始める
 
 1. まず [ダウンロード](docs/download.md) で必要なファイルを確認する
-2. 新規の Windows 環境では [インストール(Windows)](docs/install-win.md) を選ぶ
+2. 使用中のOSに合わせて[Windows](docs/install-win.md)、[Linux](docs/install-linux.md)、
+   [macOS](docs/install-mac.md)のインストール手順を選ぶ
 3. 導入後は [アップデート](docs/update.md) で独立アップデーターの入手方法と使い方を確認する
 4. 動作確認や問題解決は [トラブルシューティング](docs/trouble-shooting.md) を参照する
 
-## Windows のインストール
+## OS別のインストール
 
-新規導入には、専用 Java ランタイムを含む MSI/ZIP を使用する。初回起動時に、HTTPS 証明書、Windows 自動プロキシー、ログオン時起動、利用者データ保存先を選べる。
+新規導入には専用Javaランタイムを含むOS別パッケージまたはZIPを使用する。初回起動時に、
+利用者データ、HTTPS証明書、OSの自動プロキシー、ログイン時起動を選べる。
 
 - [Windows のインストール](docs/install-win.md)
+- [Linux のインストール](docs/install-linux.md)
+- [macOS のインストール](docs/install-mac.md)
 - [ダウンロード](docs/download.md)
 
 ## ローカルでプレビューする

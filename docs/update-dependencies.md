@@ -1,34 +1,40 @@
 # 依存関係ソフトウェアの更新
 
-## 独立アップデーターを使う方法（Windows、推奨） { #standalone-updater-dependencies }
+## 独立アップデーターを使う方法（推奨） { #standalone-updater-dependencies }
 
 [独立アップデーター](download.md#standalone-updater-download)は、次の外部依存関係を一つの GUI から確認・更新できる。
     
-- Eclipse Temurin（NicoCache_nl で確認済みの Java 17・21・25 LTS。推奨・既定は Java 25）    
-- FFmpeg    
-- Bouncy Castle    
-- Apache Ant    
-- 7-Zip    
-- GPAC/Mp4box    
+- Eclipse Temurin（NicoCache_nlで確認済みのJava 17・21・25 LTS。推奨・既定はJava 25）
+- FFmpeg
+- Bouncy Castle
+- Apache Ant
+- 7-Zip
+- GPAC/MP4Box
     
 1. NicoCache_nl を終了する。更新対象が使用中で置換できない場合、アップデーターは処理を失敗として既存内容を復元する。
 2. **NicoCache_nl Updater** を起動し、画面上部の更新対象フォルダーを確認する。誤っている場合は「変更…」から NicoCache_nl のインストール先を選ぶ。
-3. 「外部依存関係」タブを開き、Temurin LTS を選ぶ。通常は「25（推奨）」を使用する。
-4. 「環境を確認」を押し、現在の導入状況と更新候補を確認する。
-5. 「インストールまたは更新」を押し、対象を確認して続行する。
-6. 完了後に新しいコマンドプロンプトまたは PowerShell を開き、必要なツールの版を確認する。NicoCache_nl も起動し、通常どおりキャッシュできることを確認する。
+3. 「外部依存関係」タブを開き、Temurin LTSを選ぶ。通常は「25（推奨）」を使用する。
+4. 「全てチェック」、または必要な行の「更新チェック」を押し、導入版と最新版を確認する。
+5. 更新が必要な行の「インストール」、または確認済みの更新をまとめる「全てインストール」を押す。
+6. インストール後は同じ画面で自動的に再確認され、導入版・最新版・ボタン状態が更新される。
+7. NicoCache_nlを起動し、通常どおりキャッシュできることを確認する。
 
-Temurin、FFmpeg、Apache Ant、7-Zip は WinGet を優先して導入する。WinGet パッケージがない場合は公式配布 API を使用する。マシン全体への導入が必要なパッケージでは Windows の許可画面が表示されることがあり、`PATH` と `JAVA_HOME` も必要に応じて更新される。Bouncy Castle は NicoCache_nl 専用ライブラリとして管理される。
+WindowsではWinGetを優先し、パッケージがない場合は公式配布APIを使用する。Linuxでは
+APT/DNF/pacman、macOSではHomebrewを、利用者がインストールを押した場合だけ実行する。root権限が
+必要な場合はOSの認証または`sudo`が要求される。Bouncy CastleはNicoCache_nl専用ライブラリ
+としてハッシュ検証付きで管理される。
 
-## Windows パッケージ利用者
+## 自己完結パッケージ利用者
 
-MSI/ZIP 版は専用 Java ランタイムと証明書生成に必要な依存ライブラリを同梱する。個別のファイルを手作業で置換せず、更新が必要な場合は独立アップデーターを使用すること。推測による置換は起動不能や証明書生成失敗の原因になる。
+Windows/Linux/macOSの現行パッケージは専用Javaランタイムと証明書生成に必要な依存ライブラリを
+同梱する。個別ファイルを手作業で置換せず、更新には独立アップデーターを使用すること。
 
 ブラウザーは、OS またはブラウザーの通常の更新機能で最新の安定版を利用すること。Firefox では証明書ストアの利用方式により CA 証明書の再登録が必要になることがある。
 
 ## JAR を直接利用する構成
 
-Java は本体が対応する LTS を使用する。現行の Windows パッケージは JDK 25 を含むが、手動起動用の `RunNicoCache.ps1` は検出した Java 17・21・25 から選択できる。更新前に現在の Java を確認すること。
+Javaは本体が対応する17・21・25 LTSを使用する。自己完結パッケージはJava 25を基に生成した
+専用ランタイムを含むため、外部Javaの更新はJARを直接起動する構成だけで必要になる。
 
 ```powershell
 java -version

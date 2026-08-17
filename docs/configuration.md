@@ -1,6 +1,15 @@
 # 設定とデータ管理
 
-NicoCache_nl の設定は `config.properties` に保存する。既定値の一覧は `defaults/00_NicoCache.properties`、`defaults/10_NicoCache_nl.properties`、`defaults/25_NicoCache_nl_NEW.properties`、TLS 関連は `defaults/30_NicoCache_nl_TLS.properties` にある。既定ファイルは更新で置き換わるため、直接編集しないこと。
+NicoCache_nlの設定はアプリケーションルートの`config.properties`に保存する。既定値は用途別に
+次のファイルへ分かれている。既定ファイルは更新で置き換わるため、直接編集しない。
+
+- `defaults/application.properties`
+- `defaults/network.properties`
+- `defaults/video-cache.properties`
+- `defaults/thumbnail-cache.properties`
+- `defaults/rewriting.properties`
+- `defaults/https-mitm.properties`
+- `defaults/legacy-cache-compatibility.properties`
 
 ## 変更方法
 
@@ -20,15 +29,18 @@ NicoCache_nl の設定は `config.properties` に保存する。既定値の一�
 | `cacheFolder=` | 動画キャッシュの保存先。未指定時は `cache`。パスを変更する場合は空き容量とバックアップ方針を確認する。 |
 | `needFreeSpace=100` | この空き容量（MB）を下回ると新しいキャッシュを停止する。 |
 | `title=true` / `tidyTitle=true` | 新規キャッシュのファイル名へタイトルを使うか、整形するか。 |
-| `resumeDownload=true` | 途中で止まった動画の取得を再開する。 |
-| `cacheThumbnail=false` | サムネイルをローカルへ保存する。必要に応じて `thcacheFolder` と合わせて設定する。 |
+| `cacheThumbnail=true` | サムネイルをローカルへ保存する。必要に応じて `thcacheFolder` と合わせて設定する。 |
 | `localFileServer=true` | `/local/` のローカル資材配信を有効にする。既定で有効。 |
-| `localFlv=true` | `/cache/` を利用したローカル再生支援を有効にする。 |
-| `enableMitM=true` | HTTPS MitM を有効にする。証明書の生成・信頼・PAC 設定が完了している場合だけ使う。 |
-| `userDataRoot=` | 利用者データの保存先。Windows パッケージ版では初回セットアップが絶対パスを設定する。 |
+| `localRewriter=true` | ローカル資材にも対象nlFilterを適用する。 |
+| `enableMitm=true` | HTTPS MitMを有効にする。現行ニコニコ動画でキャッシュ・書き換えを使うために必要。 |
+| `userDataRoot=` | 利用者データの保存先。初回セットアップがOS別の既定候補または選択した絶対パスを設定する。 |
+
+設定キーは大文字・小文字を区別する。`enableMitM`ではなく`enableMitm`を使用する。
 
 ## キャッシュを削除・移動する前に
 
-キャッシュ、サムネイル、コメントなどは利用者データ側に保存される。削除前に NicoCache_nl を終了し、必要なファイルをバックアップすること。アプリケーション本体を更新・削除しても、利用者データは自動削除されない。
+キャッシュ、サムネイル、コメント、証明書、追加した`local`・`nlFilters`・Extensionは利用者
+データ側に保存される。削除前にランチャーから本体を停止し、必要なファイルをバックアップする。
+アプリケーション本体を更新・削除しても、利用者データは自動削除されない。
 
 キャッシュを外部から大きく移動・削除した後は、NicoCache_nl を再起動して状態を読み直すこと。`checkRealCache=true` は外部操作を追跡するが、大量移動時の負荷に注意が必要である。

@@ -1,7 +1,7 @@
-# 手動インストール（Solaris）
+# Solarisはサポート対象外
 
-Solaris では [共通の手動インストール手順](install-linux.md) に従う。使用できる Java の版を `java -version` で確認してから、展開先で `./NicoCache_nl.sh` または `java -jar NicoCache_nl.jar` を実行する。
+現行のNicoCache_nlはSolaris向けパッケージを公開せず、CI、初回セットアップ、独立アップデーター
+でも検証していない。LinuxまたはmacOS向けの配布物をSolarisへ転用しないこと。
 
-HTTPS を使う場合は `genCerts.sh` により `certs/ca.cer` を生成し、使用するブラウザーまたは OS の信頼済み認証局へ登録する。ブラウザーのプロキシー自動設定 URL は `http://127.0.0.1:8080/proxy.pac` である。
-
-サービス化・ログイン時起動は、Solaris の運用方針に応じて SMF またはユーザーセッション側で設定する。すべての利用者へ開放する必要がない限り、`allowFrom=local` を維持すること。
+このページは古いリンクから到達した利用者へ対象外であることを知らせるために残している。
+対応環境では[ダウンロード](download.md)からOS・CPUに合う自己完結パッケージを使用する。
