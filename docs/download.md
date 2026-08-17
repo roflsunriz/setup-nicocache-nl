@@ -68,9 +68,29 @@ cat NicoCache_nl-1.4.2-macos-arm64.pkg.sha256
 `NicoCache_nl.jar`を直接起動する構成では、対応するJava 17・21・25 LTSと、TLS、設定、
 起動管理を自分で用意する必要がある。通常利用ではOS別の自己完結パッケージを選ぶ。
 
-## 関連配布物
+## filter-matome（統合拡張スイート）
 
-- 追加フィルターなど: [roflsunriz/filter-matome Releases](https://github.com/roflsunriz/filter-matome/releases)
-- 本体の更新内容: [NicoCache_nl CHANGELOG](https://github.com/roflsunriz/NicoCache_nl/blob/main/CHANGELOG.md)
+[filter-matome](https://github.com/roflsunriz/filter-matome)は単独の追加nlFilterではなく、
+次の資材を組み合わせてNicoCache_nlとニコニコ動画へ機能を追加する統合拡張スイートである。
 
-追加資材はアプリケーションルートへ上書きせず、利用者データ側の対応フォルダーへ配置する。
+- `nlFilters/`: ブラウザー側の機能群を読み込む100番台のnlFilter
+- `local/`: 視聴履歴、マイリスト2、コメントフィルター2、ローカル動画プレイヤー、
+  視聴ページ操作パネル、キャッシュ管理、動画情報表示、動画取得予約などのブラウザー側資材
+- `extensions/`: キャッシュ操作、動画取得、シリーズ通知、FFmpeg・GPAC連携などを担う
+  コンパイル済みJava Extensionとソース
+- `scripts/`: 設定・更新・メディア処理・開発者向け操作をまとめた、任意利用のJava Toolbox
+
+個別機能だけを抜き出す構成は動作保証外である。[filter-matome Releases](https://github.com/roflsunriz/filter-matome/releases)
+から`filter-matome-<version>.7z`を取得し、アーカイブ内の`GUIDE.html`または
+[filter-matome Usage Guide](https://roflsunriz.github.io/filter-matome/USAGE/)を確認して一式を導入する。
+
+配置先はNicoCache_nl本体のアプリケーションルートだけではない。`config.properties`の
+`userDataRoot`で実際の利用者データルートを確認し、NicoCache_nlを終了してから、配布物の
+`local`、`nlFilters`、`extensions`を利用者データ側の同名フォルダーへ上書きする。
+Java Toolboxを使う場合だけ、`scripts`をアプリケーションルートへ配置する。更新前には
+各機能の設定・データと自分で追加した背景画像をバックアップし、配置後はNicoCache_nlを
+再起動してブラウザーをハード再読み込みすること。
+
+## 本体の変更履歴
+
+- [NicoCache_nl CHANGELOG](https://github.com/roflsunriz/NicoCache_nl/blob/main/CHANGELOG.md)

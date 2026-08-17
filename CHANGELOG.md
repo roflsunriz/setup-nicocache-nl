@@ -24,6 +24,9 @@
 
 ### Fixed
 
+- filter-matomeを単なる追加フィルターと誤解しないよう、統合拡張スイートとして提供する
+  ブラウザー機能、Java Extension、Java Toolbox、配布形式、配置先、導入時の注意を
+  実際のリポジトリとリリース定義に合わせて修正した。
 - 実在しない`NicoCache_nl.exe`、`NicoCache_nl.sh`、`genCerts.sh`、旧defaults名、
   誤った`enableMitM`表記を案内しないよう、起動入口、設定ファイル名、設定キーを現行実装へ修正した。
 - 独立アップデーターの実際の「全てチェック」「更新チェック」「インストール」
