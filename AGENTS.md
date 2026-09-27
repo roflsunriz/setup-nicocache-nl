@@ -17,3 +17,4 @@ Get-Content -Raw -LiteralPath .\COMMON-AGENTS.md
 
 - 作業前にこのリポジトリの `README.md`、設定ファイル、CI 定義を確認する。
 - 追加のプロジェクト固有ルールが必要になった場合は、このファイルに追記する。
+- Zensical は旧 Git 更新日時プラグインを実行しない。公開用の `scripts/build-docs.py` は全履歴の `git log` から日付を取得して一時的な文書コピーへ付ける。CI と Pages では `fetch-depth: 0` を維持する。

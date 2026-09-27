@@ -47,18 +47,18 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 
 ## ローカルでプレビューする
 
-MkDocs でローカル確認できる。
+Zensical でローカル確認できる。
 
 ```bash
 pip install -r requirements.txt
-mkdocs serve --livereload --dirty
+zensical serve
 ```
 
 ブラウザーで `http://127.0.0.1:8000` を開くと確認できる。
 
 ## デプロイ
 
-`main` ブランチに push すると GitHub Actions が MkDocs Material でビルドし、GitHub Pages へデプロイする。
+`main` ブランチに push すると GitHub Actions が Zensical でビルドし、GitHub Pages へデプロイする。公開用の厳格ビルドは `python scripts/build-docs.py` で再現でき、各ページの Git 最終更新日も表示される。
 
 ## ライセンス
 

@@ -12,6 +12,8 @@
 
 ### Changed
 
+- 文書の外観と Git 最終更新日を保ちながら公開を続けるため、MkDocs Material から Zensical の classic テーマへ移行した。
+
 - 依存更新を安全に省力化するため、Dependabot の patch／minor PR を既存 CI の全チェック成功後に自動取り込みし、失敗ジョブを一度再実行する設定を追加した。
 - Windowsに加えてLinuxのDEB/RPM/ZIPとmacOSのPKG/DMG/ZIPを迷わず選べるよう、
   ダウンロード、インストール、独立アップデーター、利用者データの説明を現行の自己完結

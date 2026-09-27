@@ -1,5 +1,11 @@
 # 検証手順
 
+## Zensical 文書ビルド（2026-09-27）
+
+`python -m pip install -r requirements.txt` 後、`python scripts/build-docs.py` を実行する。`site/index.html` と代表ページに Git 最終更新日が表示され、元の `docs/` が変更されないことを確認する。Pages の checkout は `fetch-depth: 0` を維持し、公開後は Actions と実サイトを確認する。
+
+2026-09-27 のローカル検証では Zensical 0.0.65 の strict ビルドが成功し、Markdown 17 ページに対応する HTML 17 ページと 404 ページを生成した。トップページの更新日表示を確認した。Pages 実配信は未検証。
+
 ## Dependabot 自動処理（2026-09-23）
 
 `.github/workflows/dependabot-automation.yml` を actionlint で検査し、PR 用 workflow 名（CI）と一致することを確認する。Dependabot の patch／minor かつ全 PR チェック成功の場合だけ取り込み、major・古い SHA・再失敗は残す。

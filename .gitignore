@@ -1,3 +1,5 @@
 .venv/**
 site/
+.zensical-build.yml
+zensical-docs-*/
 COMMON-AGENTS.md
