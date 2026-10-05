@@ -47,7 +47,7 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 
 ## ローカルでプレビューする
 
-Zensical でローカル確認できる。
+Zensical を使うと、公開前にローカルでページを確認できる。
 
 ```bash
 pip install -r requirements.txt
@@ -58,7 +58,7 @@ zensical serve
 
 ## デプロイ
 
-`main` ブランチに push すると GitHub Actions が Zensical でビルドし、GitHub Pages へデプロイする。公開用の厳格ビルドは `python scripts/build-docs.py` で再現でき、各ページの Git 最終更新日も表示される。
+`main` ブランチに push すると、GitHub Actions が Zensical でビルドし、GitHub Pages へデプロイする。公開用の厳格ビルドは `python scripts/build-docs.py` で再現できる。公開ページには、各ページの Git 最終更新日も表示される。
 
 ## ライセンス
 
