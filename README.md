@@ -47,18 +47,11 @@ NicoCache_nl のインストール、設定、トラブルシューティング�
 
 ## ローカルでプレビューする
 
-Zensical を使うと、公開前にローカルでページを確認できる。
-
-```bash
-pip install -r requirements.txt
-zensical serve
-```
-
-ブラウザーで `http://127.0.0.1:8000` を開くと確認できる。
+具体的な手順・構成・知見は [findings.md](<findings.md#readme-4>) に移動しました。着手前に該当条件を確認してください。
 
 ## デプロイ
 
-`main` ブランチに push すると、GitHub Actions が Zensical でビルドし、GitHub Pages へデプロイする。公開用の厳格ビルドは `python scripts/build-docs.py` で再現できる。公開ページには、各ページの Git 最終更新日も表示される。
+具体的な手順・構成・知見は [findings.md](<findings.md#readme-5>) に移動しました。着手前に該当条件を確認してください。
 
 ## ライセンス
 
@@ -66,4 +59,4 @@ zensical serve
 
 ## 依存更新の自動処理
 
-Dependabot は対象の依存関係を毎週確認します。patch／minor 更新は PR のチェック（CI）が成功した後に自動で squash merge されます。CI の失敗ジョブは 1 回だけ再実行します。再失敗した PR は残して手動で修正します。major 更新は手動で確認します。マージ後はデプロイ workflow を明示起動します。
+具体的な手順・構成・知見は [findings.md](<findings.md#readme-7>) に移動しました。着手前に該当条件を確認してください。
